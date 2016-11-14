@@ -60,6 +60,9 @@
 #include <ome/common/xml/dom/Node.h>
 #include <ome/common/xml/dom/NodeList.h>
 
+{% if klass.name != "OME" %}\
+#include <ome/xml/model/detail/OMEModel.h>
+{% end if %}\
 #include <ome/xml/model/primitives/Quantity.h>
 
 {% for include in klass.header_dependencies %}\
@@ -106,7 +109,12 @@ namespace ome
        * ${klass.name} model object.
        */
 {% if klass.parentName is not None %}\
+{% if klass.name != "OME" %}\
       class ${klass.name} : public ${klass.parentName}
+{% end if %}\
+{% if klass.name == "OME" %}\
+      class ${klass.name} : public ${klass.parentName}, public detail::OMEModel
+{% end if %}\
 {% end has parentName %}\
 {% if klass.parentName is None %}\
       class ${klass.name}
@@ -242,12 +250,18 @@ namespace ome
 {% if fu.SOURCE_TYPE == "source" %}\
       ${klass.name}::${klass.name}():
         ${lang.omexml_model_package}::OMEModelObject(),
+{% if klass.name == "OME" %}\
+        ${lang.omexml_model_package}::OMEModel(),
+{% end if %}\
 {% if klass.parentName is not None %}\
         ${klass.parentName}(),
 {% end has parent %}\
+{% if klass.name == "OME" %}\
+        ${lang.omexml_model_package}::detail::OMEModel(),
+{% end if %}\
         impl(ome::compat::make_shared<Impl>())
       {
-        logger.add_attribute("ClassName", logging::attributes::constant<std::string>("${klass.name}"));
+        detail::OMEModelObject::logger.add_attribute("ClassName", logging::attributes::constant<std::string>("${klass.name}"));
       }
 
 {% end source %}\
@@ -262,9 +276,15 @@ namespace ome
 {% if fu.SOURCE_TYPE == "source" %}\
       ${klass.name}::${klass.name} (const ${klass.name}& copy):
         ${lang.omexml_model_package}::OMEModelObject(),
+{% if klass.name == "OME" %}\
+        ${lang.omexml_model_package}::OMEModel(),
+{% end if %}\
 {% if klass.parentName is not None %}\
         ${klass.parentName}(copy),
 {% end has parent %}\
+{% if klass.name == "OME" %}\
+        ${lang.omexml_model_package}::detail::OMEModel(),
+{% end if %}\
         impl(ome::compat::make_shared<Impl>(*copy.impl))
       {
       }
@@ -390,7 +410,7 @@ ${customContent}\
         const std::string tagName(stripNamespacePrefix(element.getTagName()));
         if (!validElementName(tagName))
           {
-            BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
+            BOOST_LOG_SEV(detail::OMEModelObject::logger, ome::logging::trivial::warning)
               << tagName << " is an invalid element name for ${klass.name}";
           }
 {% for prop in klass.properties.values() %}\
@@ -542,7 +562,7 @@ ${customUpdatePropertyContent[prop.name]}
                                                                                               child->getTextContent()));
                 else
                   {
-                    BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
+                    BOOST_LOG_SEV(detail::OMEModelObject::logger, ome::logging::trivial::warning)
                       << "MapAnnotation entry M does not contain key attribute K";
                   }
               }
@@ -567,7 +587,7 @@ ${customUpdatePropertyContent[prop.name]}
                                                                                              child->getTextContent()));
                 else
                   {
-                    BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
+                    BOOST_LOG_SEV(detail::OMEModelObject::logger, ome::logging::trivial::warning)
                       << "MapAnnotation entry M does not contain key attribute K";
                   }
               }
@@ -739,7 +759,7 @@ ${customUpdatePropertyContent[prop.name]}
           }
 {% end %}\
 {% end %}\
-        BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
+        BOOST_LOG_SEV(detail::OMEModelObject::logger, ome::logging::trivial::warning)
           << "Unable to handle reference of type: "
           << typeid(reference).name();
         return false;

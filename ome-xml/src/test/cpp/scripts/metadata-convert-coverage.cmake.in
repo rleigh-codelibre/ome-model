@@ -29,7 +29,7 @@ saved_store=$(mktemp ome-xml-store-symbols.XXXXXXXXX)
 saved_convert=$(mktemp ome-xml-convert-symbols.XXXXXXXXX)
 trap "rm -f \"$saved_store\" \"$saved_convert\"" 0 1 2 3 15
 
-store_symbols | sort | uniq | egrep -v '^(setRoot)$' >> "$saved_store"
+store_symbols | sort | uniq | egrep -v '^(setRoot|setModel)$' >> "$saved_store"
 convert_symbols | sort | uniq >> "$saved_convert"
 
 missing_convert="$(comm -2 -3 "$saved_store" "$saved_convert")"

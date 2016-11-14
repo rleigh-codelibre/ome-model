@@ -70,12 +70,15 @@ namespace ome
           /// Constructor.
           OMEModel ();
 
+          /// Copy constructor.
+          OMEModel (const OMEModel& copy);
+
           /// Destructor.
           ~OMEModel ();
 
           /// @copydoc ome::xml::model::OMEModel::addModelObject
           ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>
-          addModelObject (const std::string&                                   id,
+          addModelObject (const std::string&                                           id,
                           ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>& object);
 
           // Documented in parent.

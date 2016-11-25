@@ -88,7 +88,14 @@ import ${lang.omexml_model_package}.primitives.*;
 public abstract class ${klass.name} extends ${klass.parentName}
 {% end %}\
 {% when not klass.isAbstract %}\
+{% if klass.name != "OME" %}\
 public class ${klass.name} extends ${klass.parentName}
+       class ${klass.name} : public ${klass.parentName}
+{% end if %}\
+{% if klass.name == "OME" %}\
+public class ${klass.name} extends ${klass.parentName}
++      class ${klass.name} : public ${klass.parentName}, public detail::OMEModel
++{% end if %}\
 {% end %}\
 {% end %}\
 {

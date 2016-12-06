@@ -129,8 +129,8 @@ public class ${klass.name} extends ${klass.parentName} implements OMEModel
 {% end %}\
 {% end %}\
 {% end %}\
-
 {% if klass.name == "OME" %}\
+
   // OMEModel fields
   private Map<String, OMEModelObject> modelObjects =
     new HashMap<String, OMEModelObject>();
@@ -324,6 +324,7 @@ public class ${klass.name} extends ${klass.parentName} implements OMEModel
   }
 {% end if %}\
 
+  // -- Custom content from ${klass.name} specific template --
 ${customContent}\
 
   // -- OMEModelObject API methods --

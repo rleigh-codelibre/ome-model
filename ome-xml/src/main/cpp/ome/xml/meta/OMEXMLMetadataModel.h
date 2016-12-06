@@ -66,9 +66,10 @@ namespace ome
 	/// Copy constructor.
 	OMEXMLMetadataModel(const xml::model::OME& copy);
 
+      private:
         /// Assignment operator (deleted).
         OMEXMLMetadataModel&
-        operator= (const OMEXMLMetadataModel&) = delete;
+        operator= (const OMEXMLMetadataModel&);
 
       public:
         /// Destructor.

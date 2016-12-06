@@ -60,18 +60,19 @@ namespace ome
         MetadataModel()
         {}
 
-        /// Copy constructor (deleted).
-        MetadataModel (const MetadataModel&) = delete;
-
-        /// Assignment operator (deleted).
-        MetadataModel&
-        operator= (const MetadataModel&) = delete;
-
       public:
         /// Destructor.
         virtual
         ~MetadataModel()
         {}
+
+      private:
+       /// Copy constructor (deleted).
+        MetadataModel (const MetadataModel&);
+
+        /// Assignment operator (deleted).
+        MetadataModel&
+        operator= (const MetadataModel&);
       };
 
     }

@@ -77,12 +77,13 @@ namespace ome
         OMEModel ()
         {}
 
+      private:
         /// Copy constructor (deleted).
-        OMEModel (const OMEModel&) = delete;
+        OMEModel (const OMEModel&);
 
         /// Assignment operator (deleted).
         OMEModel&
-        operator= (const OMEModel&) = delete;
+        operator= (const OMEModel&);
 
       public:
         /// Destructor.
@@ -90,7 +91,6 @@ namespace ome
         ~OMEModel ()
         {}
 
-      public:
         /**
          * Get the OME root object.
          *

@@ -81,7 +81,7 @@ public class OMEXMLMetadataModel extends OME implements MetadataModel {
   public OMEXMLMetadataModel(Element element, OMEModel model)
     throws EnumerationException
   {
-    super(element);
+    super(element, model);
   }
 
   /**

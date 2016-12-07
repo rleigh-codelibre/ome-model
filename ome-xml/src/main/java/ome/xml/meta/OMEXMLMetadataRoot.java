@@ -81,7 +81,7 @@ public class OMEXMLMetadataRoot extends OMEXMLMetadataModel implements MetadataR
   public OMEXMLMetadataRoot(Element element, OMEModel model)
     throws EnumerationException
   {
-    super(element);
+    super(element, model);
   }
 
   /**

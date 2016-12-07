@@ -60,9 +60,7 @@
 #include <ome/common/xml/dom/Node.h>
 #include <ome/common/xml/dom/NodeList.h>
 
-{% if klass.name != "OME" %}\
-#include <ome/xml/model/detail/OMEModel.h>
-{% end if %}\
+#include <ome/xml/model/OMEModel.h>
 #include <ome/xml/model/primitives/Quantity.h>
 
 {% for include in klass.header_dependencies %}\
@@ -113,7 +111,7 @@ namespace ome
       class ${klass.name} : public ${klass.parentName}
 {% end if %}\
 {% if klass.name == "OME" %}\
-      class ${klass.name} : public ${klass.parentName}, public detail::OMEModel
+      class ${klass.name} : public ${klass.parentName}, virtual public OMEModel
 {% end if %}\
 {% end has parentName %}\
 {% if klass.parentName is None %}\
@@ -136,6 +134,15 @@ namespace ome
         ${prop[0]} ${prop[1]};
 {% end has instance type %}\
 {% end for %}\
+{% if klass.name == "OME" %}\
+
+        // OMEModel data
+
+        /// Mapping of id to model object.
+        object_map_type modelObjects;
+        /// Mapping of model object to reference.
+        reference_map_type references;
+{% end if %}\
 {% end has instanceVariables %}\
 
         /// Default constructor.
@@ -143,7 +150,7 @@ namespace ome
         Impl():
 {% for prop in klass.instanceVariables %}\
 {% if prop[0] is not None %}\
-{% if prop == klass.instanceVariables[-1] %}\
+{% if prop == klass.instanceVariables[-1] and klass.name != "OME" %}\
 {% if prop[2] is not None %}\
           ${prop[1]}(${prop[2]})
 {% end has default %}\
@@ -151,7 +158,7 @@ namespace ome
           ${prop[1]}()
 {% end no default %}\
 {% end last member %}\
-{% if prop != klass.instanceVariables[-1] %}\
+{% if prop != klass.instanceVariables[-1] or klass.name == "OME"%}\
 {% if prop[2] is not None %}\
           ${prop[1]}(${prop[2]}),
 {% end has default %}\
@@ -161,6 +168,10 @@ namespace ome
 {% end not last member %}\
 {% end has instance type %}\
 {% end for %}\
+{% if klass.name == "OME" %}\
+          modelObjects(),
+          references()
+{% end if %}\
 {% end has instanceVariables %}\
 {% if len(klass.instanceVariables) == 0 %}\
         Impl()
@@ -173,7 +184,7 @@ namespace ome
         Impl(const Impl& copy):
 {% for prop in klass.instanceVariables %}\
 {% if prop[0] is not None %}\
-{% if prop == klass.instanceVariables[-1] %}\
+{% if prop == klass.instanceVariables[-1] and klass.name != "OME" %}\
 {% if prop[2] is not None %}\
           ${prop[1]}(copy.${prop[1]})
 {% end has default %}\
@@ -181,16 +192,21 @@ namespace ome
           ${prop[1]}(copy.${prop[1]})
 {% end no default %}\
 {% end last member %}\
-{% if prop != klass.instanceVariables[-1] %}\
+{% if prop != klass.instanceVariables[-1] or klass.name == "OME" %}\
 {% if prop[2] is not None %}\
           ${prop[1]}(copy.${prop[1]}),
 {% end has default %}\
-{% if prop[2] is None %}\
+{% if prop[2] is None and klass.name != "OME" %}\
           ${prop[1]}(copy.${prop[1]}),
 {% end no default %}\
 {% end not last member %}\
 {% end has instance type %}\
 {% end for %}\
+{% if klass.name == "OME" %}\
+          // Shallow copy at present.
+          modelObjects(copy.modelObjects),
+          references(copy.references)
+{% end if %}\
 {% end has instanceVariables %}\
 {% if len(klass.instanceVariables) == 0 %}\
         Impl(const Impl& /* copy */)
@@ -256,9 +272,6 @@ namespace ome
 {% if klass.parentName is not None %}\
         ${klass.parentName}(),
 {% end has parent %}\
-{% if klass.name == "OME" %}\
-        ${lang.omexml_model_package}::detail::OMEModel(),
-{% end if %}\
         impl(ome::compat::make_shared<Impl>())
       {
         detail::OMEModelObject::logger.add_attribute("ClassName", logging::attributes::constant<std::string>("${klass.name}"));
@@ -282,9 +295,6 @@ namespace ome
 {% if klass.parentName is not None %}\
         ${klass.parentName}(copy),
 {% end has parent %}\
-{% if klass.name == "OME" %}\
-        ${lang.omexml_model_package}::detail::OMEModel(),
-{% end if %}\
         impl(ome::compat::make_shared<Impl>(*copy.impl))
       {
       }
@@ -331,6 +341,198 @@ namespace ome
         return newinstance;
       }
 {% end source %}\
+
+{% if klass.name == "OME" %}\
+{% if fu.SOURCE_TYPE == "header" %}\
+        /// @copydoc ome::xml::model::OMEModel::addModelObject
+        ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>
+        addModelObject (const std::string&                                           id,
+                        ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>& object);
+{% end header %}\
+{% if fu.SOURCE_TYPE == "source" %}\
+      ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>
+      OME::addModelObject(const std::string&                                           id,
+                          ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>& object)
+      {
+        // Don't store references.
+        if (ome::compat::dynamic_pointer_cast<Reference>(object))
+          return object;
+
+        object_map_type::iterator i = this->impl->modelObjects.find(id);
+        if (i != this->impl->modelObjects.end())
+          i->second = object;
+        else
+          this->impl->modelObjects.insert(std::make_pair(id, object));
+
+        return object;
+      }
+{% end source %}\
+
+{% if fu.SOURCE_TYPE == "header" %}\
+        // Documented in parent.
+        ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>
+        removeModelObject (const std::string& id);
+{% end header %}\
+{% if fu.SOURCE_TYPE == "source" %}\
+      ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>
+      OME::removeModelObject(const std::string& id)
+      {
+        ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject> ret;
+
+        object_map_type::iterator i = this->impl->modelObjects.find(id);
+        if (i != this->impl->modelObjects.end())
+          {
+            ret = i->second;
+            this->impl->modelObjects.erase(i);
+          }
+
+        return ret;
+      }
+{% end source %}\
+
+{% if fu.SOURCE_TYPE == "header" %}\
+        // Documented in parent.
+        ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>
+        getModelObject (const std::string& id) const;
+{% end header %}\
+{% if fu.SOURCE_TYPE == "source" %}\
+      ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>
+      OME::getModelObject(const std::string& id) const
+      {
+        ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject> ret;
+
+        object_map_type::const_iterator i = this->impl->modelObjects.find(id);
+        if (i != this->impl->modelObjects.end())
+          ret = i->second;
+
+        return ret;
+      }
+{% end source %}\
+
+{% if fu.SOURCE_TYPE == "header" %}\
+        // Documented in parent.
+        const object_map_type&
+        getModelObjects () const;
+{% end header %}\
+{% if fu.SOURCE_TYPE == "source" %}\
+      const OMEModel::object_map_type&
+      OME::getModelObjects () const
+      {
+        return this->impl->modelObjects;
+      }
+{% end source %}\
+
+{% if fu.SOURCE_TYPE == "header" %}\
+        /// @copydoc ome::xml::model::OMEModel::addReference
+        bool
+        addReference (ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>& a,
+                      ome::compat::shared_ptr<Reference>&                          b);
+{% end header %}\
+{% if fu.SOURCE_TYPE == "source" %}\
+      bool
+      OME::addReference (ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject>& a,
+                         ome::compat::shared_ptr<Reference>&                          b)
+      {
+        reference_map_type::iterator i = this->impl->references.find(a);
+
+        if (i == this->impl->references.end())
+          {
+            std::pair<reference_map_type::iterator,bool> r =
+              this->impl->references.insert(std::make_pair(a, reference_map_type::value_type::second_type()));
+            i = r.first;
+          }
+        i->second.push_back(b);
+        return true;
+      }
+{% end source %}\
+
+{% if fu.SOURCE_TYPE == "header" %}\
+        // Documented in parent.
+        const reference_map_type&
+        getReferences () const;
+{% end header %}\
+{% if fu.SOURCE_TYPE == "source" %}\
+      const OMEModel::reference_map_type&
+      OME::getReferences () const
+      {
+        return this->impl->references;
+      }
+{% end source %}\
+
+{% if fu.SOURCE_TYPE == "header" %}\
+        // Documented in parent.
+        size_type
+        resolveReferences ();
+{% end header %}\
+{% if fu.SOURCE_TYPE == "source" %}\
+      OMEModel::size_type
+      OME::resolveReferences ()
+      {
+        size_type unhandledReferences = 0;
+
+        for (reference_map_type::iterator i = this->impl->references.begin();
+             i != this->impl->references.end();
+             ++i)
+          {
+            const ome::compat::shared_ptr<const ::ome::xml::model::OMEModelObject>& a(i->first);
+
+            if (!a)
+              {
+                const reference_list_type& references(i->second);
+
+                if (references.empty())
+                  {
+                    BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
+                      << "No references to null object; continuing";
+                  }
+                else
+                  {
+                    BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
+                      << "Null reference to " << references.size()
+                      << " objects; continuing";
+                  }
+                unhandledReferences += references.size();
+              }
+            else
+              {
+                reference_list_type& references(i->second);
+
+                for (reference_list_type::iterator ref = references.begin();
+                     ref != references.end();
+                     ++ref)
+                  {
+                    if (!(*ref))
+                      {
+                        BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
+                          << typeid(*a).name() << "@" << a
+                          << " reference to null object; continuing";
+                      }
+                    else
+                      {
+                        const std::string& referenceID = (*ref)->getID();
+
+                        ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject> b = getModelObject(referenceID);
+                        if (!b)
+                          {
+                            BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
+                              << typeid(*a).name() << "@" << a
+                              << " reference to " << referenceID
+                              << " missing from object hierarchy";
+                            unhandledReferences++;
+                          }
+                        else
+                          {
+                            ome::compat::shared_ptr< ::ome::xml::model::OMEModelObject> aw(ome::compat::const_pointer_cast< ::ome::xml::model::OMEModelObject>(a));
+                            aw->link(*ref, b);
+                          }
+                      }
+                  }
+              }
+          }
+        return unhandledReferences;
+      }
+{% end source %}\
+{% end if %}\
 
 {% if fu.SOURCE_TYPE == "header" %}\
         // Documented in superclass.

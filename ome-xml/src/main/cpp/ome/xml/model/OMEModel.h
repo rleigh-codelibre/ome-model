@@ -92,14 +92,6 @@ namespace ome
         {}
 
         /**
-         * Get the OME root object.
-         *
-         * @returns the OME root object.
-         */
-        ome::compat::shared_ptr<OME>
-        getRoot();
-
-        /**
          * Add a model object to the model.  Note that the concrete
          * implementation will not add types derived from Reference.
          *

@@ -1,7 +1,7 @@
 /*
  * #%L
  * OME-XML C++ library for working with OME-XML metadata structures.
- * Copyright © 2006 - 2016 Open Microscopy Environment:
+ * Copyright © 2016 Open Microscopy Environment:
  *   - Massachusetts Institute of Technology
  *   - National Institutes of Health
  *   - University of Dundee
@@ -35,12 +35,10 @@
  * #L%
  */
 
-#ifndef OME_XML_META_METADATAROOT_H
-#define OME_XML_META_METADATAROOT_H
+#ifndef OME_XML_META_METADATAMODEL_H
+#define OME_XML_META_METADATAMODEL_H
 
-#include <cstdint>
-
-#include <ome/xml/meta/MetadataModel.h>
+#include <ome/compat/cstdint.h>
 
 namespace ome
 {
@@ -50,37 +48,38 @@ namespace ome
     {
 
       /**
-       * Metadata root node interface.  This class provides no
+       * Metadata model interface.  This class provides no
        * functionality; its purpose is to provide a common base type
-       * for the root node type of metadata storage implementations.
+       * for the underlying model implementation used by metadata
+       * storage implementations.
        */
-      class MetadataRoot : virtual public ::ome::xml::meta::MetadataModel
+      class MetadataModel
       {
       protected:
         /// Constructor.
-        MetadataRoot():
-          MetadataModel()
+        MetadataModel()
         {}
 
       public:
         /// Destructor.
         virtual
-        ~MetadataRoot()
+        ~MetadataModel()
         {}
 
-        /// @cond SKIP
-        MetadataRoot (const MetadataRoot&) = delete;
+      private:
+       /// Copy constructor (deleted).
+        MetadataModel (const MetadataModel&);
 
-        MetadataRoot&
-        operator= (const MetadataRoot&) = delete;
-        /// @endcond SKIP
+        /// Assignment operator (deleted).
+        MetadataModel&
+        operator= (const MetadataModel&);
       };
 
     }
   }
 }
 
-#endif // OME_XML_META_METADATAROOT_H
+#endif // OME_XML_META_METADATAMODEL_H
 
 /*
  * Local Variables:

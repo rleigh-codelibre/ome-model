@@ -36,6 +36,7 @@
  * #L%
  */
 
+#include <iostream>
 #include <map>
 #include <memory>
 #include <string>
@@ -141,12 +142,15 @@ namespace ome
         {
           size_type unhandledReferences = 0;
 
+          std::cerr << "OMEModel::resolveReferences init\n";
           for (auto& i : references)
             {
+              std::cerr << "  OMEModel::resolveReferences object\n";
               const std::shared_ptr<const ::ome::xml::model::OMEModelObject>& a(i.first);
 
               if (!a)
                 {
+                  std::cerr << "    OMEModel::resolveReferences NULL object\n";
                   const reference_list_type& references(i.second);
 
                   if (references.empty())
@@ -164,23 +168,28 @@ namespace ome
                 }
               else
                 {
+                  std::cerr << "    OMEModel::resolveReferences object found\n";
                   reference_list_type& references(i.second);
 
                   for (auto& ref : references)
                     {
+                      std::cerr << "      OMEModel::resolveReferences ref\n";
                       if (!ref)
                         {
+                          std::cerr << "        OMEModel::resolveReferences NULL ref\n";
                           BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
                             << typeid(*a).name() << "@" << a
                             << " reference to null object; continuing";
                         }
                       else
                         {
+                          std::cerr << "        OMEModel::resolveReferences ref OK\n";
                           const std::string& referenceID = ref->getID();
 
                           std::shared_ptr<::ome::xml::model::OMEModelObject> b = getModelObject(referenceID);
                           if (!b)
                             {
+                              std::cerr << "        OMEModel::resolveReferences NULL b ref\n";
                               BOOST_LOG_SEV(logger, ome::logging::trivial::warning)
                                 << typeid(*a).name() << "@" << a
                                 << " reference to " << referenceID
@@ -189,6 +198,7 @@ namespace ome
                             }
                           else
                             {
+                              std::cerr << "        OMEModel::resolveReferences b ref OK\n";
                               std::shared_ptr<::ome::xml::model::OMEModelObject> aw(std::const_pointer_cast<::ome::xml::model::OMEModelObject>(a));
                               aw->link(ref, b);
                             }

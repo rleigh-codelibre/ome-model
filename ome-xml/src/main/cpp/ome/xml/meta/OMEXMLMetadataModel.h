@@ -35,12 +35,13 @@
  * #L%
  */
 
-#ifndef OME_XML_META_METADATAROOT_H
-#define OME_XML_META_METADATAROOT_H
+#ifndef OME_XML_OME_OMEXMLMETADATAMODEL_H
+#define OME_XML_OME_OMEXMLMETADATAMODEL_H
 
 #include <cstdint>
 
 #include <ome/xml/meta/MetadataModel.h>
+#include <ome/xml/model/OME.h>
 
 namespace ome
 {
@@ -50,38 +51,37 @@ namespace ome
     {
 
       /**
-       * Metadata root node interface.  This class provides no
-       * functionality; its purpose is to provide a common base type
-       * for the root node type of metadata storage implementations.
+       * OME-XML metadata root node.
        */
-      class MetadataRoot : virtual public ::ome::xml::meta::MetadataModel
+      class OMEXMLMetadataModel : public ::ome::xml::model::OME,
+                                  virtual public ::ome::xml::meta::MetadataModel
       {
-      protected:
+      public:
         /// Constructor.
-        MetadataRoot():
-          MetadataModel()
-        {}
+        OMEXMLMetadataModel();
+
+	/// Copy constructor.
+	OMEXMLMetadataModel(const OMEXMLMetadataModel& copy);
+
+	/// Copy constructor.
+	OMEXMLMetadataModel(const xml::model::OME& copy);
+
+      private:
+        /// Assignment operator (deleted).
+        OMEXMLMetadataModel&
+        operator= (const OMEXMLMetadataModel&);
 
       public:
         /// Destructor.
         virtual
-        ~MetadataRoot()
-        {}
-
-      private:
-        /// Copy constructor (deleted).
-        MetadataRoot (const MetadataRoot&);
-
-        /// Assignment operator (deleted).
-        MetadataRoot&
-        operator= (const MetadataRoot&);
+        ~OMEXMLMetadataModel();
       };
 
     }
   }
 }
 
-#endif // OME_XML_META_METADATAROOT_H
+#endif // OME_XML_OME_OMEXMLMETADATAMODEL_H
 
 /*
  * Local Variables:

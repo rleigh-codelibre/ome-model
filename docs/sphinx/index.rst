@@ -69,17 +69,15 @@ OME-XML
     ome-tiff/tools
     ome-xml/java-library
 
-*******************
-File specifications
-*******************
+*************************
+Specification conformance
+*************************
 
 .. toctree::
     :maxdepth: 1
     :titlesonly:
 
-    specifications/index
-    specifications/compliant-hcs 
-    specifications/minimum
+    specification/conformance
 
 
 ******************************

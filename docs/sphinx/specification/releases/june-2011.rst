@@ -1,20 +1,8 @@
 Changes for June 2011
 =====================
 
-This schema uses the new namespace::
-
-    http://www.openmicroscopy.org/Schemas/[NameSpaceTitle]/2011-06/
-
-For the OME schema::
-
-    http://www.openmicroscopy.org/Schemas/OME/2011-06/
-
-and the schema file is located at::
-
-    http://www.openmicroscopy.org/Schemas/OME/2011-06/ome.xsd
-
-Overview of changes
--------------------
+Overview
+--------
 
 -  ``Polyline`` and ``Path`` have been **DEPRECATED**.
 -  ROI font enumerations have been updated.

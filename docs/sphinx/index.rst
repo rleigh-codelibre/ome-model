@@ -33,34 +33,9 @@ Metadata model
     :maxdepth: 1
     :titlesonly:
 
+    specification/index
+
     specification/conformance
-
-
-******************************
-Developer tools and guidelines
-******************************
-
-.. toctree::
-    :maxdepth: 1
-    :titlesonly:
-
-    developers/index
-    developers/using-ome-xml
-    developers/compression
-    developers/sample-files
-    developers/id-and-lsid
-    developers/ome-units
-
-************************
-The Data Model in detail
-************************
-
-Generated documentation for the :schema_doc:`current version of the entire
-Schema <ome.html>` is also available.
-
-.. toctree::
-    :maxdepth: 1
-    :titlesonly:
 
     developers/model-overview
     developers/filter-and-filterset
@@ -70,58 +45,32 @@ Schema <ome.html>` is also available.
     developers/6d-7d-and-8d-storage
     developers/legacy/index
 
+    developers/index
+    developers/using-ome-xml
+    developers/compression
+    developers/sample-files
+    developers/id-and-lsid
+    developers/ome-units
 
-******************
-Data Model history
-******************
+    specification/releases/index
 
-.. toctree::
-    :maxdepth: 1
-    :titlesonly:
-
-    schemas/index
-    schemas/june-2016-2
-    schemas/june-2016
-    schemas/january-2015
-    schemas/june-2013
-    schemas/june-2012
-    schemas/june-2011
-    schemas/june-2010
-    schemas/april-2010
-    schemas/september-2009
-    schemas/september-2008
-    schemas/february-2008
-    schemas/june-2007-2
-    schemas/june-2007
-
-.. toctree::
-    :hidden:
-
-    schemas/september-2007
-
-********
-OME-TIFF
-********
+************
+File formats
+************
 
 .. toctree::
     :maxdepth: 1
     :titlesonly:
 
     ome-tiff/index
-    ome-tiff/file-structure
-    ome-tiff/specification
-    ome-tiff/code
-    ome-tiff/data
+    ome-xml/index
 
-
-*******
-OME-XML
-*******
+************
+tmp---------
+************
 
 .. toctree::
     :maxdepth: 1
     :titlesonly:
 
-    ome-xml/index
-    ome-tiff/tools
-    ome-xml/java-library
+    tmp

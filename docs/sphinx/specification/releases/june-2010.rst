@@ -1,22 +1,8 @@
 Changes for June 2010
 =====================
 
-This schema uses the new namespace::
-
-    http://www.openmicroscopy.org/Schemas/[NameSpaceTitle]/2010-06/
-
-For the OME schema::
-
-    http://www.openmicroscopy.org/Schemas/OME/2010-06/
-
-and the schema file is located at::
-
-    http://www.openmicroscopy.org/Schemas/OME/2010-06/ome.xsd
-
-General updates
----------------
-
-This release represents a collection of general updates to solve problems.
+Overview
+--------
 
 -  The release has been brought in step with release of OMERO 4.2.
 -  Integer types have been made more restrictive.
@@ -26,12 +12,12 @@ This release represents a collection of general updates to solve problems.
    allow cross-linking of all annotations.
 
 ome.xsd
-^^^^^^^
+-------
 
 -  Integer types have been made more restrictive.
 
 ROI.xsd
-^^^^^^^
+-------
 
 -  ``Width`` has been added to ``Mask``.
 -  ``Height`` has been added to ``Mask``.
@@ -39,7 +25,7 @@ ROI.xsd
    directly annotatable, annotations will be moved up to the ROI level).
 
 SA.xsd
-^^^^^^
+------
 
 -  ``CommentAnnotation`` has been renamed as ``StructuredAnnotations``.
 -  ``TagAnnotation`` has been added to ``StructuredAnnotations``.
@@ -52,7 +38,7 @@ SA.xsd
 -  ``ROI:Shape`` is no longer in the list of annotatable objects.
 
 SPW.xsd
-^^^^^^^
+-------
 
 -  ``WellOriginX`` in ``Plate`` has been documented.
 -  ``WellOriginY`` in ``Plate`` has been documented.

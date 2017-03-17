@@ -1,18 +1,6 @@
 Changes for June 2013
 =====================
 
-This schema uses the new namespace::
-
-    http://www.openmicroscopy.org/Schemas/[NameSpaceTitle]/2013-06/
-
-For the OME schema::
-
-    http://www.openmicroscopy.org/Schemas/OME/2013-06/
-
-and the schema file is located at::
-
-    http://www.openmicroscopy.org/Schemas/OME/2013-06/ome.xsd
-
 BinaryFile
 ----------
 

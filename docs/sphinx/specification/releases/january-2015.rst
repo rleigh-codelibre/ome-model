@@ -1,20 +1,8 @@
 Changes for January 2015
 ========================
 
-This schema uses the new namespace::
-
-    http://www.openmicroscopy.org/Schemas/[NameSpaceTitle]/2015-01/
-
-For the OME schema::
-
-    http://www.openmicroscopy.org/Schemas/OME/2015-01/
-
-and the schema file is located at::
-
-    http://www.openmicroscopy.org/Schemas/OME/2015-01/ome.xsd
-
-Overview of changes
--------------------
+Overview
+--------
 
 - This version introduces a major new system of specifying units
   for the values stored as lengths, times, pressures, angles, temperatures,

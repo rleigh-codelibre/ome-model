@@ -116,3 +116,9 @@ https://trac.openmicroscopy.org/ome.
 Users can also add work tickets to the system detailing any changes they
 feel should be made.
 
+.. toctree::
+    :maxdepth: 1
+    :titlesonly:
+
+    ../ome-tiff/tools
+    java-library

@@ -1,40 +1,20 @@
 Changes for June 2012
 =====================
 
-
-The list of the key changes for the June 2012 major release of the
-ome-xml data model. This schema release will tie in with the Bio-Formats
-4.4 release.
-
-The new major release of the schema has a new namespace and all version
-numbers are reset to 1. As a major release, any file that validated
-correctly using the last major release will probably not validate
-correctly using this new release. Some files that failed to validate
-before will now be valid. It is important to update any file readers and
-writers to understand the changes.
-
-The version number of all schema files is now 1.
-
-This schema uses the new namespace:
-
-::
+This schema uses the new namespace::
 
     http://www.openmicroscopy.org/Schemas/[NameSpaceTitle]/2012-06/
 
-For the OME schema
-
-::
+For the OME schema::
 
     http://www.openmicroscopy.org/Schemas/OME/2012-06/
 
-and the schema file is located at
-
-::
+and the schema file is located at::
 
     http://www.openmicroscopy.org/Schemas/OME/2012-06/ome.xsd
 
-Overview of changes
--------------------
+Overview
+--------
 
 -  This release is in step with release of Bio-Formats 4.4.
 -  It is preparation for the Major release of OMERO **after** 4.4.
@@ -49,7 +29,7 @@ Overview of changes
 -  ``OTF`` and all associated objects have been **REMOVED**.
 
 General changes
-^^^^^^^^^^^^^^^
+---------------
 
 -  **All** colors are now stored as new type ``Color``.
 -  The default value for all colors is now solid white (due to legacy
@@ -59,13 +39,13 @@ General changes
    objects.
 
 BinaryFile
-^^^^^^^^^^
+----------
 
 -  The only change here is the general change adding ``appinfo`` blocks for 
    ``xsd-fu`` to specify plurals.
 
 OME
-^^^
+---
 
 -  ``AcquiredDate`` has been renamed to ``AcquisitionDate`` in ``Image``.
 -  ``ExperimentGroup`` has been renamed to ``Group``.
@@ -87,7 +67,7 @@ OME
 -  ``OTF`` and all associated objects have been **REMOVED**.
 
 OMERO
-^^^^^
+-----
 
 :file:`OMERO.xsd` is not included in this release. It has been extensively
 reworked and expanded as part of the OME Model and OMERO Database
@@ -101,7 +81,7 @@ so will be unaffected by the future release of this single file.
     cases in our code generation application ``xsd-fu``.
 
 ROI
-^^^
+---
 
 -  All objects defining colors now use the type 'OME:Color' from
    file:`ome.xsd`.
@@ -122,7 +102,7 @@ ROI
 -  ``Transform`` has been converted to the new type ``AffineTransform``.
 
 SA
-^^
+--
 
 Additional intermediate abstract annotations (``BasicAnnotation``,
 ``NumericAnnotation``, ``TextAnnotation``, ``TypeAnnotation``) have been added 
@@ -133,7 +113,7 @@ current annotations has not changed, and the new intermediate abstract
 annotations are not used directly.
 
 SPW
-^^^
+---
 
 -  ``FieldIndex`` has been added to ``Plate`` - this means the index of the 
    WellSample displays as the default Field.

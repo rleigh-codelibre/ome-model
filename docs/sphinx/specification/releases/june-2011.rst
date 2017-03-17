@@ -1,35 +1,15 @@
 Changes for June 2011
 =====================
 
-
-The list of the key changes for the June 2011 major release of the
-ome-xml data model. This schema release will tie in with the OMERO 4.3
-release.
-
-The new major release of the schema has a new namespace and all version
-numbers are reset to 1. As a major release, any file that validated
-correctly using the last major release will probably not validate
-correctly using this new release. Some files that failed to validate
-before will now be valid. It is important to update any file readers and
-writers to understand the changes.
-
-The version number of all schema files is now 1.
-
-This schema uses the new namespace:
-
-::
+This schema uses the new namespace::
 
     http://www.openmicroscopy.org/Schemas/[NameSpaceTitle]/2011-06/
 
-For the OME schema
-
-::
+For the OME schema::
 
     http://www.openmicroscopy.org/Schemas/OME/2011-06/
 
-and the schema file is located at
-
-::
+and the schema file is located at::
 
     http://www.openmicroscopy.org/Schemas/OME/2011-06/ome.xsd
 
@@ -44,7 +24,7 @@ Overview of changes
 -  The OTF (Optical Transfer Function) has been **DEPRECATED**.
 
 ROI
-^^^
+---
 
 -  ``Polyline`` and ``Path`` have been **DEPRECATED** as they are due to be 
    replaced in the next major release, to provide support for 3-dimensional
@@ -55,7 +35,7 @@ ROI
    HTML/CSS.
 
 OME
-^^^
+---
 
 -  The OME node has been modified to allow creation of the Metadata-Only
    Companion OME-XML and Binary-Only OME-TIFF files.

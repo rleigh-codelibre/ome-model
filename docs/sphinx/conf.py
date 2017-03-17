@@ -150,6 +150,7 @@ extlinks = {
     'about_plone' : (oo_site_root + '/about/%s', ''),
     'team_plone' : (oo_site_root + '/team/%s', ''),
     'schema_plone' : (oo_root + '/Schemas/%s', ''),
+    'transform_plone' : (oo_root + '/Schemas/Transforms/%s', ''),
     'omero_plone' : (oo_site_root + '/products/omero/%s', ''),
     'secvuln' : (oo_root + '/info/vulnerabilities/%s', ''),
     'bf_plone' : (oo_site_root + '/products/bio-formats/%s', ''),
@@ -179,6 +180,7 @@ extlinks = {
     'omero_doc' : (oo_site_root + '/support/omero/%s', ''),
     'bf_doc' : (oo_site_root + '/support/bio-formats/%s', ''),
     'schema_doc' : (oo_root + '/Schemas/Documentation/Generated/OME-' + model_version + '/%s', ''),
+    'schema_doc_generated' : (oo_root + '/Schemas/Documentation/Generated/%s', ''),
     # Downloads
     'bf_downloads' : (downloads_root + '/latest/bio-formats/%s', ''),
     'cpp_downloads' : (downloads_root + '/latest/ome-files-cpp/%s', ''),

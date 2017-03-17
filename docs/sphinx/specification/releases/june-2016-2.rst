@@ -1,0 +1,13 @@
+Changes for June 2016 release 2
+===============================
+
+Channel
+-------
+
+Added the following as valid values for ``AcquisitionMode``:
+
+-  ``BrightField``
+-  ``SweptFieldConfocal``
+-  ``SPIM``
+
+Also added parsing for Laser Scan Confocal and Swept Field Confocal.

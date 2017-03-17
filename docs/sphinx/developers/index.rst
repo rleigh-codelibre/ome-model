@@ -37,7 +37,7 @@ Support for additional dimensions is also covered:
 -  :doc:`6D, 7D and 8D Storage <6d-7d-and-8d-storage>`
 
 Map Annotations, storing 'key-value pairs', are a type of Structured
-Annotation which were introduced in the :doc:`/schemas/january-2015`. Further
+Annotation which were introduced in the :doc:`/specification/releases/january-2015`. Further
 information is available in the :omero_doc:`OMERO developer documentation on
 Key-value pairs <developers/Model/KeyValuePairs.html>` and a
 :omexml_downloads:`sample OME-XML file <mapannotation.ome.xml>` is also
@@ -59,12 +59,12 @@ The system of units used by the model is covered in this section:
 
 -  :doc:`ome-units`
 
-The :doc:`Schema versions</schemas/index>` section shows the Model changes
+The :doc:`Schema versions</specification/releases/index>` section shows the Model changes
 with each release, helpful for those working with several versions of the OME
 Model, for example to support the loading/saving of a variety of files.
 
 -  The **current major release** - see :doc:`Changes For June
-   2016 </schemas/june-2016>`.
+   2016 </specification/releases/june-2016>`.
 
 For further information, see the 
 :omero_doc:`OME Data Model <developers/index.html#the-ome-data-model>` section

@@ -1,60 +1,35 @@
 Changes for September 2008
 ==========================
 
-
-List of the key changes for the September 2008 major release of the
-ome-xml data model.
-
-The new major release of the schema has a new namespace and all version
-numbers are reset to 1. As a major release, any file that validated
-correctly using the last major release will probably not validate
-correctly using this new release. Some files that failed to validate
-before will now be valid. It is important to update any file readers and
-writers to understand the changes.
-
-The version number of all schema files is now 1.
-
-
-This schema uses the new namespace:
-
-::
+This schema uses the new namespace::
 
     http://www.openmicroscopy.org/Schemas/[NameSpaceTitle]/2008-09/
 
-For the OME schema
-
-::
+For the OME schema::
 
     http://www.openmicroscopy.org/Schemas/OME/2008-09/
 
-and that the schema file will be located at
-
-::
+and that the schema file will be located at::
 
     http://www.openmicroscopy.org/Schemas/OME/2008-09/ome.xsd
 
-Overview of Changes
--------------------
-
 Additional Schema file SA.xsd
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 This provides support for the new ``StructuredAnnotation`` objects. The list
 of annotations is:
 
-::
-
-    XmlAnnotation
-    FileAnnotation
-    ListAnnotation
-    LongAnnotation
-    DoubleAnnotation
-    StringAnnotation
-    BooleanAnnotation
-    TimestampAnnotation
+- ``XmlAnnotation``
+- ``FileAnnotation``
+- ``ListAnnotation``
+- ``LongAnnotation``
+- ``DoubleAnnotation``
+- ``StringAnnotation``
+- ``BooleanAnnotation``
+- ``TimestampAnnotation``
 
 Additional Schema file OMERO.xsd
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------
 
 This provides support for the specific use of OMERO in the
 ``StructuredAnnotation`` objects. Each OMERO-specific block is stored in an
@@ -64,63 +39,58 @@ how we are using structured annotations within OMERO.
 
 
 Optional and non-optional Objects
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 -  The following objects have been made **optional** to allow the import
    of the metadata from Bio-Formats and maintain consistency:
 
-::
-
-    OME:Image:CreationDate
-    OME:Image:Pixels:Plane:PlaneTiming:DeltaT
-    OME:Image:Pixels:Plane:PlaneTiming:ExposureTime
-    OME:Experiment:ExperimenterRef
-    OME:Instrument:Microscope
-    OME:Instrument:Objective:CalibratedMagnification
-    OME:Instrument:Objective:LensNA
-    OME:Instrument:Objective:NominalMagnification
-    OME:Instrument:Objective:WorkingDistance
-    OME:Instrument:Filter:TransmittanceRange
-    OME:Instrument:Filter:TransmittanceRange:CutIn
-    OME:Instrument:Filter:TransmittanceRange:CutOut
-    OME:Instrument:Filter:TransmittanceRange:Transmittance
-    OME:StagePosition:PositionX
-    OME:StagePosition:PositionY
-    OME:StagePosition:PositionZ
-    OME:Project:ExperimenterRef
-    ManufactSpec:Manufacturer
-    ManufactSpec:Model
+- ``OME:Image:CreationDate``
+- ``OME:Image:Pixels:Plane:PlaneTiming:DeltaT``
+- ``OME:Image:Pixels:Plane:PlaneTiming:ExposureTime``
+- ``OME:Experiment:ExperimenterRef``
+- ``OME:Instrument:Microscope``
+- ``OME:Instrument:Objective:CalibratedMagnification``
+- ``OME:Instrument:Objective:LensNA``
+- ``OME:Instrument:Objective:NominalMagnification``
+- ``OME:Instrument:Objective:WorkingDistance``
+- ``OME:Instrument:Filter:TransmittanceRange``
+- ``OME:Instrument:Filter:TransmittanceRange:CutIn``
+- ``OME:Instrument:Filter:TransmittanceRange:CutOut``
+- ``OME:Instrument:Filter:TransmittanceRange:Transmittance``
+- ``OME:StagePosition:PositionX``
+- ``OME:StagePosition:PositionY``
+- ``OME:StagePosition:PositionZ``
+- ``OME:Project:ExperimenterRef``
+- ``ManufactSpec:Manufacturer``
+- ``ManufactSpec:Model``
 
 ``ManufactSpec`` is the base type for several other objects.
 
 -  The following objects have been made **optional in the model** but
    **NOT in the OMERO database** - a value will be generated on import:
 
-::
-
-    OME:Image:Name
-    OME:Plate:Name
-    OME:Dataset:Name
-    OME:Project:Name
-    OME:Screen:Name
+- ``OME:Image:Name``
+- ``OME:Plate:Name``
+- ``OME:Dataset:Name``
+- ``OME:Project:Name``
+- ``OME:Screen:Name``
 
 -  The following objects **are not optional** - but they now
    support the value 'Unknown':
 
-::
-
-    OME:Instrument:LightSource:Laser:LaserMedium - Added new UnknownLaserMedia type to union.
-    OME:Instrument:LightSource:Laser:Type - added Unknown.
-    OME:Instrument:LightSource:Arc:Type - added Unknown.
-    OME:Instrument:LightSource:Filament:Type - added Unknown.
-    OME:Instrument:Microscope:Type - added Unknown.
-    OME:Instrument:Objective:Correction - added Unknown.
-    OME:Instrument:Objective:Immersion - added Unknown.
-    OME:Instrument:Detector:Type - added Unknown.
+- ``OME:Instrument:LightSource:Laser:LaserMedium`` - Added new
+  ``UnknownLaserMedia`` type to union.
+- ``OME:Instrument:LightSource:Laser:Type`` - added ``Unknown``.
+- ``OME:Instrument:LightSource:Arc:Type`` - added ``Unknown``.
+- ``OME:Instrument:LightSource:Filament:Type`` - added ``Unknown``.
+- ``OME:Instrument:Microscope:Type`` - added ``Unknown``.
+- ``OME:Instrument:Objective:Correction`` - added ``Unknown``.
+- ``OME:Instrument:Objective:Immersion`` - added ``Unknown``.
+- ``OME:Instrument:Detector:Type`` - added ``Unknown``.
 
 
 MicrobeamManipulation
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 -  Moving ``MicrobeamManipulation`` from ``Image`` to ``Experiment`` 
    **(held until next release)**
@@ -144,7 +114,7 @@ should not be changed after the manipulation. This change is being made at
 this time as the ROI is already being changed.
 
 New ROI model
-^^^^^^^^^^^^^
+-------------
 
 The new model has a more powerful ROI model and the display options are
 now stored as Structured Annotations. Elements added include
@@ -152,27 +122,26 @@ now stored as Structured Annotations. Elements added include
 several shapes derived from ``BasicSvgShape``.
 
 Min/Max/Optional/Required
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
-All elements now have an explicit minOccurs and maxOccurs. All
-attributes now have a use value 'optional' or 'required'.
+All elements now have an explicit ``minOccurs`` and ``maxOccurs``. All
+attributes now have a use value ``optional`` or ``required``.
 
 PinholeSize type changed
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
-The ``PinholeSize`` type has changed from 'xsd:positiveInteger' to 
-'xsd:float' with units µm.
+The ``PinholeSize`` type has changed from ``xsd:positiveInteger`` to
+``xsd:float`` with units µm.
 
 Added LightEmittingDiode
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 This element is a stub to act as a placeholder until more values are
 needed for this type.
 
 Pixels
-^^^^^^
+------
 
 ``Pixels`` can now contain **EITHER** ``BinData`` or ``TiffData`` - previously 
 the model allowed there to be a mixture of the two, which was not the intended 
 use.
-

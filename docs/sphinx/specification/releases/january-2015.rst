@@ -1,36 +1,15 @@
 Changes for January 2015
 ========================
 
-
-The list of the key changes for the January 2015 major release of the
-OME-XML data model. This schema release will tie in with the Bio-Formats
-5.1 release.
-
-The new major release of the schema has a new namespace and all version
-numbers are reset to 1. As a major release, any file that validated
-correctly using the last major release will probably not validate
-correctly using this new release. Some files that failed to validate
-before will now be valid. It is important to update any file readers and
-writers to understand the changes.
-
-The version number of all schema files is now 1, except ome.xsd which
-version number is 2.
-
-This schema uses the new namespace:
-
-::
+This schema uses the new namespace::
 
     http://www.openmicroscopy.org/Schemas/[NameSpaceTitle]/2015-01/
 
-For the OME schema
-
-::
+For the OME schema::
 
     http://www.openmicroscopy.org/Schemas/OME/2015-01/
 
-and the schema file is located at
-
-::
+and the schema file is located at::
 
     http://www.openmicroscopy.org/Schemas/OME/2015-01/ome.xsd
 
@@ -46,14 +25,13 @@ Overview of changes
   Objects in the model are now directly annotatable or have a 1 to 1
   relationship with an object that is.
 
-
 BinaryFile
-^^^^^^^^^^
+----------
 
 - There are no significant changes to this component.
 
 OME
-^^^
+---
 
 - Expanded documentation for ``AcquisitionDate`` describing supported
   precision.
@@ -126,12 +104,12 @@ OME
   be expressed as one of the other types.
 
 OMERO
-^^^^^
+-----
 
 :file:`OMERO.xsd` is not included in this release.
 
 ROI
-^^^
+---
 
 - Added Annotation points to:
     ``Shape: AnnotationRef``
@@ -140,13 +118,13 @@ ROI
     ``ROI: FontSizeUnit``
 
 SA
-^^
+--
 
 - Added a new ``MapAnnotation`` type. This makes use of the new
   ``Map`` element from ``ome.xsd`` to store a collection of key-value pairs.
 
 SPW
-^^^
+---
 
 - Added attributes to store:
     ``WellOriginXUnit``

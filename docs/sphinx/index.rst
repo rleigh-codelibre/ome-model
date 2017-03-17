@@ -25,9 +25,9 @@ Model, serving as a convenient file format for data migration from one
 site or user to another.
 
 
-*************************
-Specification conformance
-*************************
+**************
+Metadata model
+**************
 
 .. toctree::
     :maxdepth: 1

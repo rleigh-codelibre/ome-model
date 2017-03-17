@@ -68,10 +68,11 @@ planes are stored in each TIFF.
 Companion file vs master OME-TIFF file
 --------------------------------------
 
-Since the :doc:`2011-06 version</schemas/june-2011>` of the OME-XML schema, it
-is possible to store partial OME-XML metadata blocks in some or all of the
-TIFF files pointing to a master file containing the full OME-XML metadata (see
-the :ref:`technical specification<binary_only>` for more details).
+Since the :doc:`2011-06 version</specification/releases/june-2011>` of
+the OME-XML schema, it is possible to store partial OME-XML metadata
+blocks in some or all of the TIFF files pointing to a master file
+containing the full OME-XML metadata (see the :ref:`technical
+specification<binary_only>` for more details).
 
 The master file can be either a master OME-TIFF file or a companion OME-XML
 file (see the :ref:`multifile_samples`).

@@ -39,7 +39,7 @@ therein, including:
    motion)
 -  additional custom information you may wish to provide about your
    experiment in a structured form (known as 
-   :doc:`/developers/structured-annotations`)
+   :doc:`/specification/structured-annotations`)
 
 
 Features and applications
@@ -76,7 +76,7 @@ Some specific features of the OME-XML file format:
    Features (objects inside Images), and Datasets. Mechanisms for
    OME-compliant systems to populate databases with these user-defined
    fields is part of the specification. See the 
-   :doc:`/developers/structured-annotations` XML Schema section.
+   :doc:`/specification/structured-annotations` XML Schema section.
 
 The OME-XML Schema .xsd files and technical documentation are available on the 
 :schema_plone:`Schema pages <>`.

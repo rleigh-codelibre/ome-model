@@ -108,7 +108,7 @@ The ID types used throughout the OME-XML model are designed to support
 identifiers in two forms, full LSID format and internal-only format. The
 formats of these are now enforced in an improved way, using new regular
 expressions. For further information see
-:doc:`LSID </developers/id-and-lsid>`.
+:doc:`LSID </specification/id-and-lsid>`.
 
 The Image/Experiment Relationship
 ---------------------------------

@@ -1,5 +1,5 @@
-OME Metadata Model
-==================
+The OME Metadata Model
+======================
 
 Schema release summary
 ----------------------
@@ -272,7 +272,23 @@ STD
 .. toctree::
     :maxdepth: 1
 
-    
+    conformance
+    compatibility
+
+    model-overview
+    filter-and-filterset
+    screen-plate-well
+    structured-annotations
+    roi
+    6d-7d-and-8d-storage
+    legacy/index
+
+    developers
+    using-ome-xml
+    compression
+    sample-files
+    id-and-lsid
+    ome-units
 
 .. toctree::
     :maxdepth: 1

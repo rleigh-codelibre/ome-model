@@ -24,44 +24,11 @@ OME-XML is a file format used to store data using to the OME Metadata
 Model, serving as a convenient file format for data migration from one
 site or user to another.
 
-
-**************
-Metadata model
-**************
-
 .. toctree::
     :maxdepth: 1
     :titlesonly:
 
     specification/index
-
-    specification/conformance
-
-    developers/model-overview
-    developers/filter-and-filterset
-    developers/screen-plate-well
-    developers/structured-annotations
-    developers/roi
-    developers/6d-7d-and-8d-storage
-    developers/legacy/index
-
-    developers/index
-    developers/using-ome-xml
-    developers/compression
-    developers/sample-files
-    developers/id-and-lsid
-    developers/ome-units
-
-    specification/releases/index
-
-************
-File formats
-************
-
-.. toctree::
-    :maxdepth: 1
-    :titlesonly:
-
     ome-tiff/index
     ome-xml/index
 

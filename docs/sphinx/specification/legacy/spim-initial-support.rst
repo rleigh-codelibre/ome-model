@@ -4,7 +4,7 @@ SPIM initial support
 
 .. note:: 
     This approach is still valid but has been **superseded** by the
-    :doc:`/developers/6d-7d-and-8d-storage`.
+    :doc:`/specification/6d-7d-and-8d-storage`.
 
 This proposal was put together after talks with various groups from the Single
 (or Selective) Plane Illumination Microscopy (also known as Light Sheet

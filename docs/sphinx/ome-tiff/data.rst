@@ -57,7 +57,7 @@ BBBC
 ^^^^
 
 An OME-TIFF dataset representative of the
-:doc:`High Content Screening </developers/screen-plate-well>` section of the
+:doc:`High Content Screening </specification/screen-plate-well>` section of the
 OME Data Model, derived from the public
 `Broad Bioimage Benchmark Collection <https://data.broadinstitute.org/bbbc/>`_.
 
@@ -79,7 +79,7 @@ See `Ljosa V, Sokolnicki KL, Carpenter AE (2012). Annotated high-throughput micr
 MitoCheck
 ^^^^^^^^^
 
-An OME-TIFF dataset representative of the :doc:`ROI </developers/roi>`
+An OME-TIFF dataset representative of the :doc:`ROI </specification/roi>`
 section of the OME Data Model, derived from the public
 `MitoCheck <http://www.mitocheck.org/>`_ project.
 
@@ -155,7 +155,7 @@ according to its dimensional position for easy testing.
 Modulo datasets
 ^^^^^^^^^^^^^^^
 
-Sample files implementing the :doc:`/developers/6d-7d-and-8d-storage` are
+Sample files implementing the :doc:`/specification/6d-7d-and-8d-storage` are
 available from the :ometiff_downloads:`modulo` folder of the image downloads
 resource.
 

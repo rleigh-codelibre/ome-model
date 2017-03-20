@@ -59,10 +59,6 @@ The system of units used by the model is covered in this section:
 
 -  :doc:`ome-units`
 
-The :doc:`Schema versions</specification/releases/index>` section shows the Model changes
-with each release, helpful for those working with several versions of the OME
-Model, for example to support the loading/saving of a variety of files.
-
 -  The **current major release** - see :doc:`Changes For June
    2016 </specification/releases/june-2016>`.
 

@@ -1,10 +1,6 @@
 Developer introduction
 ======================
 
-The OME Data Model is now decoupled from the Bio-Formats code repository and
-available as a
-`stand-alone ome-model GitHub repository <https://github.com/ome/ome-model>`_.
-
 There are sample files, along with an explanation of their structure, on
 the :doc:`sample-files` page.
 
@@ -19,23 +15,6 @@ further details on updating and publishing the schema.
 Working with the OME Data Model
 -------------------------------
 
-The :doc:`Model Overview collection of diagrams <model-overview>` shows the
-structure and connections between different parts of the OME Model. Generated
-documentation for the :schema_doc:`current version of the entire Schema
-<ome.html>` is also available.
-
-Individual parts of the model are covered in more detail in the following
-sections:
-
--  :doc:`Filter And FilterSet <filter-and-filterset>`
--  :doc:`Screen Plate Well <screen-plate-well>` - our HCS solution
--  :doc:`Structured Annotations <structured-annotations>`
--  :doc:`Regions of Interest (ROIs) <roi>`
-
-Support for additional dimensions is also covered:
-
--  :doc:`6D, 7D and 8D Storage <6d-7d-and-8d-storage>`
-
 Map Annotations, storing 'key-value pairs', are a type of Structured
 Annotation which were introduced in the :doc:`/specification/releases/january-2015`. Further
 information is available in the :omero_doc:`OMERO developer documentation on
@@ -43,13 +22,6 @@ Key-value pairs <developers/Model/KeyValuePairs.html>` and a
 :omexml_downloads:`sample OME-XML file <mapannotation.ome.xml>` is also
 available.
 
-Legacy solutions for tiled images and Single (or Selective) Plane Illumination
-Microscopy (also known as Light Sheet Microscopy) are detailed in the
-following sections for reference but **both these methods have been superseded
-by the above**:
-
--  :doc:`SPIM Initial Support <legacy/spim-initial-support>`
--  :doc:`Tiled Images <legacy/tiled-images>`
 
 The use of IDs and Life Science Identifiers is explained in this section:
 

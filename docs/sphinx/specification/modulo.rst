@@ -210,3 +210,12 @@ Sample files
 
 Sample files are available in the :ref:`modulo-datasets` section of the OME-TIFF
 sample data.
+
+Historical alternatives
+-----------------------
+
+.. toctree::
+    :maxdepth: 1
+
+    spim-legacy
+    tiling-legacy

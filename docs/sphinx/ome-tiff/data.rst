@@ -155,9 +155,9 @@ according to its dimensional position for easy testing.
 Modulo datasets
 ^^^^^^^^^^^^^^^
 
-Sample files implementing the :doc:`/specification/6d-7d-and-8d-storage` are
-available from the :ometiff_downloads:`modulo` folder of the image downloads
-resource.
+Sample files implementing the :doc:`/specification/modulo` are
+available from the :ometiff_downloads:`modulo` folder of the image
+downloads resource.
 
 .. list-table::
   :widths: 25 15 40

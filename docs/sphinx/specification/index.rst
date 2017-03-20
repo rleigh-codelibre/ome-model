@@ -1,13 +1,33 @@
 The OME Metadata Model
 ======================
 
-Schema release summary
-----------------------
+.. toctree::
+    :maxdepth: 1
+
+    overview
+    conformance
+    compatibility
+
+    filter-and-filterset
+    screen-plate-well
+    structured-annotations
+    roi
+    modulo
+
+    developers
+    using-ome-xml
+    compression
+    sample-files
+    id-and-lsid
+    ome-units
+
+    releases/index
+
+Specification release summary
+-----------------------------
 
 The following table provides quick links to the documentation,
-schemas, transforms and change history for all schema releases.  More
-detailed documentation for the current schema release is provided
-below.
+schemas, transforms and change history for all specification releases.
 
 .. list-table::
     :header-rows: 1
@@ -268,42 +288,3 @@ SPW
 STD
   Semantic Type definition schema. Once a Semantic Type is defined,
   data for the defined type can be imported into the OME server.
-
-.. toctree::
-    :maxdepth: 1
-
-    conformance
-    compatibility
-
-    model-overview
-    filter-and-filterset
-    screen-plate-well
-    structured-annotations
-    roi
-    6d-7d-and-8d-storage
-    legacy/index
-
-    developers
-    using-ome-xml
-    compression
-    sample-files
-    id-and-lsid
-    ome-units
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    releases/june-2016-2
-    releases/june-2016
-    releases/january-2015
-    releases/june-2013
-    releases/june-2012
-    releases/june-2011
-    releases/june-2010
-    releases/april-2010
-    releases/september-2009
-    releases/september-2008
-    releases/february-2008
-    releases/june-2007-2
-    releases/june-2007

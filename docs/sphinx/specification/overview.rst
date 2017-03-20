@@ -1,10 +1,22 @@
-Current Data Model overview
-===========================
+Overview
+========
 
-The diagrams below illustrate some aspects of the model and further details
-are given on the following pages. Generated documentation for the
-:schema_doc:`current version of the entire Schema <ome.html>` is also
-available.
+The following diagrams below illustrate some aspects of the model and
+further details are given on the following pages. Generated
+documentation for the :schema_doc:`current version of the entire
+Schema <ome.html>` is also available.
+
+Individual parts of the model are covered in more detail in the following
+sections:
+
+-  :doc:`Filter And FilterSet <filter-and-filterset>`
+-  :doc:`Screen Plate Well <screen-plate-well>` - our HCS solution
+-  :doc:`Structured Annotations <structured-annotations>`
+-  :doc:`Regions of Interest (ROIs) <roi>`
+
+Support for additional dimensions is also covered:
+
+-  :doc:`modulo`
 
 .. figure:: /images/image_branch.png
    :align: center

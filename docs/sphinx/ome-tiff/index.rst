@@ -55,7 +55,12 @@ Public image repositories allowing image downloads as OME-TIFF
 * `JCB DataViewer <http://jcb-dataviewer.rupress.org/>`_
 * `Stowers Institute Original Data Repository <http://www.stowers.org/research/publications/odr>`_
 
-|
+Samples
+-------
+
+There are sample files, along with an explanation of their structure, on
+the :doc:`/specification/sample-files` page.
+
 
 .. only:: html
 

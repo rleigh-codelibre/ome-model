@@ -3,8 +3,8 @@ SPIM initial support
 
 
 .. note:: 
-    This approach is still valid but has been **superseded** by the
-    :doc:`/specification/6d-7d-and-8d-storage`.
+    This approach is still valid but has been **superseded** by
+    :doc:`modulo`.
 
 This proposal was put together after talks with various groups from the Single
 (or Selective) Plane Illumination Microscopy (also known as Light Sheet
@@ -41,7 +41,7 @@ Tiling
 ^^^^^^
 
 Where the SPIM data has tiled images, the existing tiling method was used (see 
-:doc:`tiled-images`).
+:doc:`tiling-legacy`).
 
 This solution used StageLabel and the Position values on Plane to
 record the location and arrangement of the individual tiles.

@@ -25,7 +25,7 @@ available.
 
 The use of IDs and Life Science Identifiers is explained in this section:
 
--  :doc:`id-and-lsid`
+-  :doc:`identifiers`
 
 The system of units used by the model is covered in this section:
 

@@ -18,7 +18,7 @@ The OME Metadata Model
     using-ome-xml
     compression
     sample-files
-    id-and-lsid
+    identifiers
     ome-units
 
     releases/index

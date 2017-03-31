@@ -8,7 +8,7 @@ Overview
   for the values stored as lengths, times, pressures, angles, temperatures,
   electric potentials (voltages), powers and frequencies.
   For more information see 
-  :doc:`the OME system of units </specification/ome-units>`.
+  :doc:`Units </specification/units>`.
 - Many annotation points have been added and some removed.
   Objects in the model are now directly annotatable or have a 1 to 1
   relationship with an object that is.

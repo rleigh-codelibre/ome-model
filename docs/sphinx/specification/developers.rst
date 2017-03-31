@@ -29,7 +29,7 @@ The use of IDs and Life Science Identifiers is explained in this section:
 
 The system of units used by the model is covered in this section:
 
--  :doc:`ome-units`
+-  :doc:`units`
 
 -  The **current major release** - see :doc:`Changes For June
    2016 </specification/releases/june-2016>`.

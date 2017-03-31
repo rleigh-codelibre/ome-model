@@ -6,6 +6,7 @@ The OME Metadata Model
 
     overview
     identifiers
+    units
     conformance
     compatibility
 
@@ -19,7 +20,6 @@ The OME Metadata Model
     using-ome-xml
     compression
     sample-files
-    ome-units
 
     releases/index
 

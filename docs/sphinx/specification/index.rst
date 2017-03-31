@@ -5,6 +5,7 @@ The OME Metadata Model
     :maxdepth: 1
 
     overview
+    identifiers
     conformance
     compatibility
 
@@ -18,7 +19,6 @@ The OME Metadata Model
     using-ome-xml
     compression
     sample-files
-    identifiers
     ome-units
 
     releases/index

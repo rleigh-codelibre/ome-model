@@ -1,8 +1,10 @@
 Identifiers
 ===========
 
-Identifiers are used to uniquely reference specific metadata.  Two
-types are supported:
+Identifiers are used to uniquely identify and cross-reference specific
+metadata.  Each uniquely identifiable unit of metadata posesses an
+identifier, from Images and Channels to ROI shapes and Annotations.
+Two types of identifier are supported:
 
 - Short identifiers, which are guaranteed to be unique internally
   within a single document.

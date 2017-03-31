@@ -5,10 +5,10 @@ The OME Metadata Model
     :maxdepth: 1
 
     overview
+    versioning
     identifiers
     units
     conformance
-    compatibility
 
     filter-and-filterset
     screen-plate-well
@@ -23,11 +23,11 @@ The OME Metadata Model
 
     releases/index
 
-Specification release summary
------------------------------
+Specification summary
+---------------------
 
 The following table provides quick links to the documentation,
-schemas, transforms and change history for all specification releases.
+schemas, transforms and change history for each specification release.
 
 .. list-table::
     :header-rows: 1

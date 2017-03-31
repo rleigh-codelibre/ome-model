@@ -1,5 +1,5 @@
-Schema release overview
-=======================
+Versioning and compatibility
+============================
 
 Versioning scheme
 -----------------
@@ -48,7 +48,7 @@ releases may include breaking changes.
 
 
 Examples
-^^^^^^^^
+--------
 
 For the June 2007 major release, ``SerialNumber`` was required in the
 ``ManafactSpec`` element. This was made optional in a minor release
@@ -63,18 +63,3 @@ reference to ``SPW:ImageRef`` would then need replacing with
 ``ImageRef`` element in the June 2011 release from the SPW schema to
 the main OME schema required a new major revision, the June 2012
 release.
-
-Documentation
--------------
-
-Auto-generated documentation is available for each release of the
-schema, including information for each attribute and element. These
-are published as :schema_plone:`XSD files <>` on the OME website. They
-are usually read by XML validators and parsers but are viewable as
-text files.  Alternatively, you can browse the :schema_doc:`current
-version of the entire Schema <ome.html>` online.
-
-Transforms are available which convert between the the different
-versions of the schemas. They can be downloaded from
-:transform_plone:`transforms <>`.
-

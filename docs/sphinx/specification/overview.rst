@@ -1,6 +1,8 @@
 Overview
 ========
 
+
+
 The OME consortium currently provides three major tools capable of working
 with OME-XML and OME-TIFF:
 
@@ -15,6 +17,8 @@ with OME-XML and OME-TIFF:
 
 -  The :omero_plone:`OMERO server <>` works directly with OME-XML. It can
    import data from OME-XML and OME-TIFF, as well as export to OME-TIFF.
+
+
 
 
 For further information, see the 

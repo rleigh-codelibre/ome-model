@@ -27,15 +27,8 @@ file format for data migration from one site or user to another.
     :titlesonly:
 
     specification/index
+    library/index
     ome-tiff/index
     ome-xml/index
-
-************
-tmp---------
-************
-
-.. toctree::
-    :maxdepth: 1
-    :titlesonly:
-
-    tmp
+    citation
+    maintenance

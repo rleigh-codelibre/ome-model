@@ -42,6 +42,11 @@ different schema major version requires the use of the appropriate XSL
 transforms to transform the data to a valid structure for the
 different schema.
 
+We always aim to keep the community informed of changes in advance.
+There will be a consultation period before each major release.  Major
+releases may include breaking changes.
+
+
 Examples
 ^^^^^^^^
 

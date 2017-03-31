@@ -1,42 +1,3 @@
-Developer introduction
-======================
-
-There are sample files, along with an explanation of their structure, on
-the :doc:`sample-files` page.
-
-OME Model development process
------------------------------
-
-The Model development process is currently being revised but we always aim to
-keep the community informed of major and breaking changes in advance. See the
-:devs_doc:`Contributing Developer <data-model-schema.html>` documentation for
-further details on updating and publishing the schema.
-
-Working with the OME Data Model
--------------------------------
-
-Map Annotations, storing 'key-value pairs', are a type of Structured
-Annotation which were introduced in the :doc:`/specification/releases/january-2015`. Further
-information is available in the :omero_doc:`OMERO developer documentation on
-Key-value pairs <developers/Model/KeyValuePairs.html>` and a
-:omexml_downloads:`sample OME-XML file <mapannotation.ome.xml>` is also
-available.
-
-
-The use of IDs and Life Science Identifiers is explained in this section:
-
--  :doc:`identifiers`
-
-The system of units used by the model is covered in this section:
-
--  :doc:`units`
-
--  The **current major release** - see :doc:`Changes For June
-   2016 </specification/releases/june-2016>`.
-
-For further information, see the 
-:omero_doc:`OME Data Model <developers/index.html#the-ome-data-model>` section
-in the OMERO developer documentation.
 
 Working with OME-XML
 --------------------
@@ -82,12 +43,6 @@ as follows:
     OMEXMLService service = factory.getInstance(OMEXMLService.class);
 
 
-Additional tools
-----------------
-
-The :program:`xsd-fu` code generator digests the OME XML schema and
-produces an object oriented C++ and Java infrastructure to ease working
-with an XML DOM tree.
 
 |
 
@@ -95,4 +50,3 @@ with an XML DOM tree.
 
     See :doc:`using-ome-xml` for further guidance on how to use OME schema
     elements in XML files.
-

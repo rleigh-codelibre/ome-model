@@ -73,7 +73,7 @@ some Java code to do the same thing; just download the
     $ xmlindent file.xml
 
 Another option is to feed the XML into our 
-:doc:`OME-XML Java library </ome-xml/java-library>`, which provides methods 
+:doc:`OME-XML Java library </library/java>`, which provides methods 
 for querying and manipulating the OME-XML (using DOM and SAX). This library is 
 what Bio-Formats uses to work with OME-XML.
 

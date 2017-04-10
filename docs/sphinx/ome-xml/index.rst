@@ -121,4 +121,3 @@ feel should be made.
     :titlesonly:
 
     ../ome-tiff/tools
-    java-library

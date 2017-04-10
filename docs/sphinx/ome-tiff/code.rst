@@ -115,9 +115,9 @@ OME-XML metadata into the TIFF comment. The complicated part is doing
 the conversion from proprietary third-party metadata into OME-XML—a task
 that Bio-Formats greatly simplifies.
 
-The following program converts the files given on the command line into
-OME-TIFF format. It requires the :bf_plone:`Bio-Formats <>` and :doc:`OME-XML
-Java </ome-xml/java-library>` libraries.
+The following program converts the files given on the command line
+into OME-TIFF format. It requires the :bf_plone:`Bio-Formats <>` and
+:doc:`OME-XML Java </library/java>` libraries.
 
 :source:`ConvertToOmeTiff.java <components/formats-gpl/utils/ConvertToOmeTiff.java>`
 

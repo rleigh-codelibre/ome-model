@@ -18,3 +18,9 @@ For C++ programmers, the :doc:`OME-XML C++ </library/cpp>` library
 provides an equivalent API to the Java library.  This is used by
 :bf_plone:`OME Files<>` similarly to Bio-Formats, to implement the
 OME-TIFF file format.
+
+.. toctree::
+    :maxdepth: 1
+
+    cpp
+    java

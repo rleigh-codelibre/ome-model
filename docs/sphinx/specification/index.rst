@@ -16,7 +16,6 @@ The OME Metadata Model
     roi
     modulo
 
-    developers
     using-ome-xml
     compression
     sample-files

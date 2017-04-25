@@ -1,5 +1,5 @@
-The OME-XML format
-==================
+The OME-XML file format
+=======================
 
 OME-XML is a project to provide support for the exchange of microscope
 imaging data within the field of life sciences. Its key aspects include

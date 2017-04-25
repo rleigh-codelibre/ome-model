@@ -1,101 +1,90 @@
 OME-TIFF specification
 ======================
 
-The following provides technical details on the OME-TIFF
-format. It assumes familiarity with both the
-`TIFF <https://en.wikipedia.org/wiki/TIFF>`_ and
-:schema_plone:`OME-XML <>` formats, although there is some review of both.
+Overview
+--------
 
 An OME-TIFF dataset consists of:
 
-- one or more files in standard TIFF format with the file extension
-  ``.ome.tif`` or ``.ome.tiff`` or
-  `BigTIFF format <http://www.awaresystems.be/imaging/tiff/bigtiff.html>`_
-  with one of these same file extensions or a BigTIFF-specific
-  extension ``.ome.tf2``, ``.ome.tf8`` or ``.ome.btf``
-- a string of OME-XML metadata embedded in the ImageDescription tag of the
-  first IFD (Image File Directory) of each file. The XML string must be UTF-8
-  encoded.
+- Image planes stored in one or more standard multi-page `TIFF
+  <https://en.wikipedia.org/wiki/TIFF>`_ files, with the file
+  extension ``.ome.tif`` or ``.ome.tiff`` or `BigTIFF format
+  <http://www.awaresystems.be/imaging/tiff/bigtiff.html/>`_ with one
+  of these same file extensions or a BigTIFF-specific extension
+  ``.ome.tf2``, ``.ome.tf8`` or ``.ome.btf``.  The organisation of
+  planes is flexible; any possible order and distribution between
+  files is permitted.
+- OME-XML metadata embedded in the ImageDescription tag of the first
+  IFD (Image File Directory) of each file. This XML string must be
+  UTF-8 encoded.  Alternatively, the OME-XML metadata may be placed in
+  a companion XML file, with the TIFF images containing a minimal
+  amount of metadata referencing the companion file.  Each file has a
+  unique identifier (UUID).
+- The OME-XML metadata may contain elements and attributes allowed in
+  a standard OME-XML file, with the exception of ``BinData`` elements,
+  which are replaced with ``TiffData`` elements.  This replaces
+  Base64-encoded image data with references to the TIFF file and IFD
+  for each plane.  OME-TIFF readers and writers are not required to
+  be able to handle ``BinData`` elements where ``TiffData`` may be
+  used instead.
 
-Note that BigTIFF-specific file extensions are an addition to the original
-specification, and software using an older version of the specification may
-not be able to handle these file extensions.
+.. warning:: I combined two duplicate sections to create the above
+    three points.  Should be functionally the same, but needs
+    double-checking.
+  
+TIFF
+----
+
+.. warning:: I removed a TIFF diagram here since it's redundant (it's
+             all in the official spec), and it included OME-XML 2003!
+
+The `TIFF specification
+<http://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf>`__
+defines the TIFF file format.  An overview of the basic data
+structures exists in the `TIFF FAQ
+<http://www.awaresystems.be/imaging/tiff/faq.html>`__.  Note that the
+file structures vary slightly between TIFF and BigTIFF.  TIFF files
+may be read and written using the specification alone, but it is more
+common to use a TIFF library such as the `libtiff
+<http://www.simplesystems.org/libtiff/>`__ C library, or Java ImageIO,
+or the Bio-Formats TIFF parser and saver classes.  Other languages may
+provide their own TIFF libraries.
+
+A TIFF file can contain any number of IFDs, with each one specifying
+an image plane along with certain accompanying metadata such as pixel
+dimensions, physical dimensions, bit depth, color lookup table,
+etc. One of the fields an IFD can contain is ``ImageDescription``,
+which provides a place to write a comment describing the metadata for
+this and all the other planes within the dataset.
+
+The minimum requirement for any TIFF reader and writer is that they
+must be able to read and write the pixel data as separate IFDs, and
+they must be able to save and edit the ``ImageDescription`` field to
+add the required OME XML metadata.  This is the case for all of the
+common TIFF libraries.
 
 OME-XML metadata
 ----------------
 
-This string is a standard block of OME-XML, except that instead of
-storing pixels as BinData elements with base64-encoded pixel data
-beneath them, it references pixels with TiffData elements that specify
-which TIFF IFD corresponds to each image plane. As such, the OME-XML
-string can be regarded as a "metadata block" because the actual pixels
-are stored within the TIFF structure, not the XML.
+A UTF-8 string containing valid OME XML text.  While the OME-XML file
+format stores pixel data within ``BinData`` elements using Base64
+encoding, OME-TIFF references pixel data using ``TiffData`` elements
+to specify which TIFF file and IFD corresponds to each image plane.
+The OME-XML string can be considered to contain only metadata, a
+"metadata block", because all pixel data is stored within the TIFF
+directory structure, not within the XML.
 
-.. _figure-tiff-header:
+A TIFF file contains one IFD per image plane.  The OME XML metadata
+block is stored only in the *first* IFD.  For a dataset distributed
+between multiple OME-TIFF files, the OME XML metadata block is stored
+in the *first IFD of each file*. (see :ref:`binary_only`, below, for
+exceptions to this rule). This metadata duplication is to ensure that
+the metadata will be completely preserved if any files in the dataset
+are lost. The duplicated OME XML metadata blocks are nearly identical,
+the difference being the file UUIDs differ between files.
 
-.. figure:: /images/ome-tiff-header.png
-   :align: center
-   :width: 90%
-   :alt: OME-TIFF header
-
-   OME-TIFF header
-
-
-The diagram :ref:`figure-tiff-header` (adapted from the TIFF
-specification) shows the organization of a TIFF header along with the
-placement of the OME-XML metadata block.  Note this is for the TIFF
-standard specification only; the header structure is slightly
-different for BigTIFF; see the `BigTIFF file format specification
-<http://www.awaresystems.be/imaging/tiff/bigtiff.html>`__. A TIFF file can
-contain any number of IFDs, with each one specifying an image plane along with
-certain accompanying metadata such as pixel dimensions, physical
-dimensions, bit depth, color table, etc. One of the fields an IFD can
-contain is ImageDescription, which provides a place to write a comment
-describing the corresponding image plane. This field is a convenient
-place to store the OME-XML metadata block—any TIFF library capable of
-parsing IFDs and extracting an ImageDescription comment can easily
-obtain an OME-TIFF file's entire set of metadata as OME-XML.
-
-.. note:: 
-    A TIFF file contains one IFD per image plane, but the
-    OME-XML metadata block is stored only in the first IFD structure.
-    However, for an image sequence distributed across multiple OME-TIFF
-    files, each file will contain a copy of the OME-XML metadata block
-    (see :ref:`binary_only` below for exceptions to
-    this rule). Thus, if any files are lost, the metadata is preserved. The
-    OME-XML block in each file is nearly identical—the only difference is in
-    the TiffData elements appearing beneath Pixels elements, since each TIFF
-    file contains a different portion of the image data (see
-    :ref:`multifile-ometiff` below).
-
-
-DimensionOrder
-^^^^^^^^^^^^^^
-
-As mentioned above, the standard OME-XML format encodes image planes as
-base64 character blocks contained within BinData elements beneath a
-Pixels element. The Pixels element has a DimensionOrder attribute that
-specifies the rasterization order of the image planes. For example,
-XYZTC means that there is a series of image planes with the Z axis
-varying fastest, followed by T, followed by C (e.g. if a XYZTC dataset
-contains two focal planes, three time points and two channels, the order
-would be: Z0-T0-C0, Z1-T0-C0, Z0-T1-C0, Z1-T1-C0, Z0-T2-C0, Z1-T2-C0,
-Z0-T0-C1, Z1-T0-C1, Z0-T1-C1, Z1-T1-C1, Z0-T2-C1, Z1-T2-C1).
-
-Since a multi-page TIFF has no limit to the number of image planes it
-can contain, the same scheme described above for specifying the
-rasterization order works within the OME-TIFF file. The only difference
-is that instead of the pixels being encoded in base64 inside BinData
-elements, they are stored within the TIFF file in the standard fashion,
-one per IFD; see the :ref:`TiffData element <tiffdata>` below for specifics.
-
-TIFF comments
-^^^^^^^^^^^^^
-
-When embedding your OME-XML string as a TIFF comment, it is best practice to
-preface it with the following informative comment:
-
-::
+When embedding the OME-XML string as a TIFF comment, it is best
+practice to preface it with the following informative comment::
 
     <!-- Warning: this comment is an OME-XML metadata block, which contains
     crucial dimensional parameters and other important metadata. Please edit
@@ -108,34 +97,35 @@ preface it with the following informative comment:
 The TiffData element
 --------------------
 
-As the illustration :ref:`figure-tiff-header` shows, all that is needed to 
-indicate that the pixels are located within the enclosing TIFF structure is a
-:schema_doc:`TiffData <ome_xsd.html#TiffData>`
-element with no attributes. By default, the first IFD corresponds to
-the first image plane (Z0-T0-C0), and the rasterization order of subsequent
-IFDs is given by the Pixels element's DimensionOrder attribute, as
-described above.
+The :schema_doc:`TiffData <ome_xsd.html#TiffData>` element is used to
+specify where to locate an image plane (the file and IFD).  By
+default, the first IFD corresponds to the first image plane
+(*Z0-T0-C0*), and the order of subsequent IFDs is described by the
+``DimensionOrder`` attribute of the ``Pixels`` element.
 
-However, there are several attributes for TiffData elements allowing
-greater control over the dimensional position of each IFD:
+Several attributes provide greater control over the dimensional
+position of each IFD.  Using these is recommended to avoid any
+ambiguity, particularly when using data sets with multiple ``Image``
+elements or which are split over multiple files.
 
--  :schema_doc:`IFD <ome_xsd.html#TiffData_IFD>`
-   - gives the IFD(s) for which this element is applicable.
-   Indexed from 0. Default is 0 (the first IFD).
--  :schema_doc:`FirstZ <ome_xsd.html#TiffData_FirstZ>`
-   - gives the Z position of the image plane at the specified
-   IFD. Indexed from 0. Default is 0 (the first Z position).
--  :schema_doc:`FirstT <ome_xsd.html#TiffData_FirstT>`
-   - gives the T position of the image plane at the specified
-   IFD. Indexed from 0. Default is 0 (the first T position).
--  :schema_doc:`FirstC <ome_xsd.html#TiffData_FirstC>`
-   - gives the C position of the image plane at the specified
-   IFD. Indexed from 0. Default is 0 (the first C position).
--  :schema_doc:`PlaneCount <ome_xsd.html#TiffData_PlaneCount>`
-   - gives the number of IFDs affected. Dimension order of
-   IFDs is given by the enclosing Pixels element's DimensionOrder
-   attribute. Default is the number of IFDs in the TIFF file, unless an
-   IFD is specified, in which case the default is 1.
+:schema_doc:`IFD <ome_xsd.html#TiffData_IFD>`
+  specifies the IFD(s) for which this element is applicable.  Indexed
+  from 0. Default is 0 (the first IFD).
+:schema_doc:`FirstZ <ome_xsd.html#TiffData_FirstZ>`
+  specifies the *Z* position of the image plane at the specified
+  IFD. Indexed from 0. Default is 0 (the first *Z* position).
+:schema_doc:`FirstT <ome_xsd.html#TiffData_FirstT>`
+  specifies the *T* position of the image plane at the specified
+  IFD. Indexed from 0. Default is 0 (the first *T* position).
+:schema_doc:`FirstC <ome_xsd.html#TiffData_FirstC>`
+  specifies the *C* position of the image plane at the specified
+  IFD. Indexed from 0. Default is 0 (the first *C* position).
+:schema_doc:`PlaneCount <ome_xsd.html#TiffData_PlaneCount>`
+  specifies the number of IFDs to be included after the starting
+  IFD. Dimension order of IFDs is given by the ``DimensionOrder``
+  attribute of the enclosing ``Pixels`` element.  The Default is the
+  number of IFDs in the TIFF file, unless an IFD is specified, in
+  which case the default is 1.
 
 Here are some example XML fragments:
 

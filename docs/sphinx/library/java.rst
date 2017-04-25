@@ -45,11 +45,11 @@ Example usage
 
 
 In some cases, it is useful to extract specific parameters or tweak
-certain values in a dataset's OME-XML metadata block. Further guidance on
-:doc:`using-ome-xml` is available, but below is a brief example of the
-OMEXMLMetadata class (which implements the MetadataStore and
-MetadataRetrieve interfaces) to greatly simplify OME-XML-related
-development tasks.
+certain values in a dataset's OME-XML metadata block. Further guidance
+on :doc:`/specification/using-ome-xml` is available, but below is a
+brief example of the OMEXMLMetadata class (which implements the
+MetadataStore and MetadataRetrieve interfaces) to greatly simplify
+OME-XML-related development tasks.
 
 The following program edits the "image name" metadata value for the file
 given on the command line. 
@@ -88,11 +88,5 @@ as follows:
 |
 
 
-.. toctree::
-    :maxdepth: 1
-    :titlesonly:
-
-    java
-
-See :doc:`using-ome-xml` for further guidance on how to use OME schema
+See :doc:`/specification/using-ome-xml` for further guidance on how to use OME schema
 elements in XML files.

@@ -317,7 +317,7 @@ public interface MetadataRetrieve extends BaseMetadata {
 {% end for %}\
    * @return the text value.
    */
-  ${o.langBaseType} get${o.topLevelName}Value(list(${indexes_string(indexes[o.topLevelName].values())[0])});
+  ${o.langBaseType} get${o.topLevelName}Value(${indexes_string(list(indexes[o.topLevelName].values())[0])});
 
 {% end %}\
 

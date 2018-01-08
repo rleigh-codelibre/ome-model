@@ -499,11 +499,11 @@ namespace ome
 {% end debug %}\
         // Documented in base class.
         void
-        set${o.name}Value(${o.langBaseType} value, ${indexes_string(indexes[o.name].items()[0][1])});
+        set${o.name}Value(${o.langBaseType} value, ${indexes_string(list(indexes[o.name].values())[0])});
 {% end header %}\
 {% if fu.SOURCE_TYPE == "source" %}\
       void
-      DummyMetadata::set${o.name}Value(${o.langBaseType}, ${indexes_string_dummy(indexes[o.name].items()[0][1])})
+      DummyMetadata::set${o.name}Value(${o.langBaseType}, ${indexes_string_dummy(list(indexes[o.name].values())[0])})
       {
       }
 {% end source %}\
@@ -511,11 +511,11 @@ namespace ome
 {% if fu.SOURCE_TYPE == "header" %}\
         // Documented in base class.
         ${o.langBaseType}
-        get${o.name}Value(${indexes_string(indexes[o.name].items()[0][1])}) const;
+        get${o.name}Value(${indexes_string(list(indexes[o.name].values())[0])}) const;
 {% end header %}\
 {% if fu.SOURCE_TYPE == "source" %}\
       ${o.langBaseType}
-      DummyMetadata::get${o.name}Value(${indexes_string_dummy(indexes[o.name].items()[0][1])}) const
+      DummyMetadata::get${o.name}Value(${indexes_string_dummy(list(indexes[o.name].values())[0])}) const
       {
         throw MetadataException("DummyMetadata", "get${o.name}Value",
                                 "intentionally not implemented");

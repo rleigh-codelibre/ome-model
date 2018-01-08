@@ -312,12 +312,12 @@ public interface MetadataRetrieve extends BaseMetadata {
   /**
    * Get the text value of ${o.name}.
    *
-{% for param in indexes[o.topLevelName].items()[0][1] %}\
+{% for param in list(indexes[o.topLevelName].values())[0] %}\
    * @param ${param['argname']} the ${param['type']} index.
 {% end for %}\
    * @return the text value.
    */
-  ${o.langBaseType} get${o.topLevelName}Value(${indexes_string(indexes[o.topLevelName].items()[0][1])});
+  ${o.langBaseType} get${o.topLevelName}Value(list(${indexes_string(indexes[o.topLevelName].values())[0])});
 
 {% end %}\
 

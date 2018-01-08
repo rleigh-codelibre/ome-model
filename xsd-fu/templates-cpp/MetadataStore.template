@@ -291,12 +291,12 @@ namespace ome
          * Set the text value of ${o.name}.
          *
          * @param value text value.
-{% for param in indexes[o.name].items()[0][1] %}\
+{% for param in list(indexes[o.name].values())[0] %}\
          * @param ${param['argname']} the ${param['type']} index.
 {% end for %}\
          */
         virtual void
-        set${o.name}Value(${o.langBaseType} value, ${indexes_string(indexes[o.name].items()[0][1])}) = 0;
+        set${o.name}Value(${o.langBaseType} value, ${indexes_string(list(indexes[o.name].values())[0])}) = 0;
 
 {% end header%}\
 {% end %}\

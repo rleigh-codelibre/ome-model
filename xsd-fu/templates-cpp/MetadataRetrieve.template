@@ -384,13 +384,13 @@ namespace ome
         /**
          * Get the text value of ${o.name}.
          *
-{% for param in indexes[o.topLevelName].items()[0][1] %}\
+{% for param in list(indexes[o.topLevelName].values())[0] %}\
          * @param ${param['argname']} the ${param['type']} index.
 {% end for %}\
          * @returns the text value.
          */
         virtual ${o.langBaseType}
-        get${o.topLevelName}Value(${indexes_string(indexes[o.topLevelName].items()[0][1])}) const = 0;
+        get${o.topLevelName}Value(${indexes_string(list(indexes[o.topLevelName].values())[0])}) const = 0;
 
 {% end header%}\
 {% end %}\

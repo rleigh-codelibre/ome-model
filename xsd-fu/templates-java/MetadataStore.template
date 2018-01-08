@@ -237,11 +237,11 @@ public interface MetadataStore extends BaseMetadata
    * Set the text value of ${o.name}.
    *
    * @param value text value.
-{% for param in indexes[o.name].items()[0][1] %}\
+{% for param in list(indexes[o.name].values())[0] %}\
    * @param ${param['argname']} the ${param['type']} index.
 {% end for %}\
    */
-  void set${o.name}Value(${o.langBaseType} value, ${indexes_string(indexes[o.name].items()[0][1])});
+  void set${o.name}Value(${o.langBaseType} value, ${indexes_string(list(indexes[o.name].values())[0])});
 
 {% end %}\
 {% if (parents[o.name] is not None and not o.isAbstract) or o.isConcreteSubstitution %}\

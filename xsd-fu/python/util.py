@@ -19,13 +19,17 @@
 
 """Various utility classes and functions."""
 
+from __future__ import absolute_import
 import codecs
 from datetime import timedelta, tzinfo
 import os
 import re
 import textwrap
 import time
-from itertools import izip, imap
+
+import six
+from six.moves import zip
+from six.moves import map
 try:
     # assigned so they're importable
     frozenset = frozenset
@@ -225,10 +229,10 @@ class odict(dict):
         return d
 
     def items(self):
-        return zip(self._keys, self.values())
+        return zip(self._keys, list(self.values()))
 
     def iteritems(self):
-        return izip(self._keys, self.itervalues())
+        return zip(self._keys, six.itervalues(self))
 
     def keys(self):
         return self._keys[:]
@@ -258,7 +262,7 @@ class odict(dict):
         return map(self.get, self._keys)
 
     def itervalues(self):
-        return imap(self.get, self._keys)
+        return map(self.get, self._keys)
 
 
 try:

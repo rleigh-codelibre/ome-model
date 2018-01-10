@@ -96,7 +96,7 @@ public class ${klass.langType}EnumHandler implements IEnumerationHandler {
 {% end %}\
 {% end %}\
 {% if klass.langType in config %}\
-{% for k, v in config[klass.langType].items() %}\
+{% for k, v in config[klass.langType] %}\
     p.put("${k}", "${v}"); // Custom mapping from enum_handler.cfg
 {% end %}\
 {% end %}\

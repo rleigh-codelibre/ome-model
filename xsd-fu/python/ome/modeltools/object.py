@@ -26,7 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from __future__ import absolute_import
-from util import odict
+from collections import OrderedDict
 import logging
 import re
 
@@ -51,7 +51,7 @@ class OMEModelObject(OMEModelEntity):
         self.base = element.getBase()
         self.name = element.getName()
         self.type = element.getType()
-        self.properties = odict()
+        self.properties = OrderedDict()
         self.isAbstract = False
         self.isParentOrdered = False
         self.isChildOrdered = False

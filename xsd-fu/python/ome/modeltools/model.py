@@ -31,7 +31,7 @@ an OME XML (http://www.ome-xml.org) XSD document.
 # POSSIBILITY OF SUCH DAMAGE.
 
 from __future__ import absolute_import
-from util import odict
+from collections import OrderedDict
 import logging
 
 from ome.modeltools.object import OMEModelObject
@@ -84,7 +84,7 @@ class OMEModel(object):
     def __init__(self, opts):
         self.opts = opts
         self.elementNameObjectMap = dict()
-        self.objects = odict()
+        self.objects = OrderedDict()
         self.parents = dict()
         # A mapping of abstract substitution groups with the abstract element
         self.substitutionElement_map = dict()

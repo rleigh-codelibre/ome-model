@@ -284,6 +284,7 @@
         <xsd:element ref="ImagingEnvironment" minOccurs="0" maxOccurs="1"/>
         <xsd:element ref="StageLabel" minOccurs="0" maxOccurs="1"/>
         <xsd:element ref="Pixels" minOccurs="1" maxOccurs="1"/>
+        <xsd:element ref="SubresolutionPixels" minOccurs="0" maxOccurs="1"/>
         <xsd:element ref="ROIRef" minOccurs="0" maxOccurs="unbounded">
           <xsd:annotation>
             <xsd:appinfo><xsdfu xmlns=""><manytomany/></xsdfu></xsd:appinfo>
@@ -473,6 +474,66 @@
           <xsd:documentation>The units of the TimeIncrement - default:seconds[s].</xsd:documentation>
         </xsd:annotation>
       </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SubresolutionPixels"> <!-- top level definition -->
+    <xsd:annotation>
+      <xsd:appinfo><xsdfu xmlns=""><plural>SubresolutionPixels</plural></xsdfu></xsd:appinfo>
+      <xsd:documentation>
+        A subset of the data in a Pixels element, used for sub-resolutions.  The pixel data
+        is assumed to have all the same acquisition parameters as the data specified in
+        Pixels.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:choice minOccurs="1" maxOccurs="1">
+          <xsd:element ref="BinData" minOccurs="1" maxOccurs="unbounded"/>
+          <xsd:element ref="TiffData" minOccurs="1" maxOccurs="unbounded"/>
+          <xsd:element ref="MetadataOnly" minOccurs="1" maxOccurs="1"/>
+        </xsd:choice>
+      </xsd:sequence>
+      <xsd:attribute name="ID" use="required" type="PixelsID"/>
+      <xsd:attribute name="SizeX" use="required" type="PositiveInt">
+        <xsd:annotation>
+          <xsd:documentation>Dimensional size of pixel data array [units:none]</xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="SizeY" use="required" type="PositiveInt">
+        <xsd:annotation>
+          <xsd:documentation>Dimensional size of pixel data array [units:none]</xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="SizeZ" use="required" type="PositiveInt">
+        <xsd:annotation>
+          <xsd:documentation>Dimensional size of pixel data array [units:none]</xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="SizeC" use="required" type="PositiveInt">
+        <xsd:annotation>
+          <xsd:documentation>Dimensional size of pixel data array [units:none]</xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="SizeT" use="required" type="PositiveInt">
+        <xsd:annotation>
+          <xsd:documentation>Dimensional size of pixel data array [units:none]</xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Subresolutions"> <!-- top level definition -->
+    <xsd:annotation>
+      <xsd:appinfo><xsdfu xmlns=""><plural>Resolutions</plural></xsdfu></xsd:appinfo>
+      <xsd:documentation>
+        The Resolutions object contains a list of SubresolutionPixels
+        elements, used to describe reduced size images of the image
+        described in the main Pixels element.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SubresolutionPixels" minOccurs="1" maxOccurs="unbounded"/>
+      </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
   <xsd:element name="Plane"> <!-- top level definition -->

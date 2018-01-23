@@ -49,7 +49,7 @@ set(XSD_FU_SCRIPT ${PROJECT_SOURCE_DIR}/xsd-fu/xsd-fu)
 set(XSD_FU python ${XSD_FU_SCRIPT})
 
 # Version of the OME-XML model to use
-set(MODEL_VERSION 2016-06)
+set(MODEL_VERSION 2018-01-DEV)
 
 # Path to the model within the source tree
 set(MODEL_PATH ${PROJECT_SOURCE_DIR}/specification/src/main/resources/released-schema/${MODEL_VERSION})

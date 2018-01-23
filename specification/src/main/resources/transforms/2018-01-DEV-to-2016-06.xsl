@@ -64,7 +64,7 @@
 
   <!-- Remove Resolutions elements -->
 
-  <xsl:template match="OME:Subresolutions"/>
+  <xsl:template match="OME:SubresolutionPixels"/>
 
   <!-- Default processing -->
 

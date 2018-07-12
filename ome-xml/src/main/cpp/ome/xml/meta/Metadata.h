@@ -77,7 +77,7 @@ namespace ome
 
         Metadata&
         operator= (const Metadata&) = delete;
-        /// @endcond SKIP
+        /// @endcond
       };
 
     }

@@ -80,7 +80,7 @@ namespace ome
 
         BaseMetadata&
         operator= (const BaseMetadata&) = delete;
-        /// @endcond SKIP
+        /// @endcond
       };
 
     }

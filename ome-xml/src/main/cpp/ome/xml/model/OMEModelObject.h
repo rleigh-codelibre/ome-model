@@ -133,7 +133,7 @@ namespace ome
 
         OMEModelObject&
         operator= (const OMEModelObject&) = delete;
-        /// @endcond SKIP
+        /// @endcond
 
         /**
          * Transform the object hierarchy rooted at this element to

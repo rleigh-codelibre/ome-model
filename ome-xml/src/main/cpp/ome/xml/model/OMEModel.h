@@ -86,7 +86,7 @@ namespace ome
 
         OMEModel&
         operator= (const OMEModel&) = delete;
-        /// @endcond SKIP
+        /// @endcond
 
         /**
          * Add a model object to the model.  Note that the concrete

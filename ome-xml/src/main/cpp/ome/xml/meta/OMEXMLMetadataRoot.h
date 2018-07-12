@@ -82,7 +82,7 @@ namespace ome
         /// @cond SKIP
         OMEXMLMetadataRoot&
         operator= (const OMEXMLMetadataRoot&) = delete;
-        /// @endcond SKIP
+        /// @endcond
       };
 
     }

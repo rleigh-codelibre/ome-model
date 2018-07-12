@@ -200,7 +200,7 @@ namespace ome
 
         MetadataStore&
         operator= (const MetadataStore&) = delete;
-        /// @endcond SKIP
+        /// @endcond
 
         /**
          * Create root node.  The action taken here is specific to the

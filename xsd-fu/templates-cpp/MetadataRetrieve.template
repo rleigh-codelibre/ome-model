@@ -196,7 +196,7 @@ namespace ome
 
         MetadataRetrieve&
         operator= (const MetadataRetrieve&) = delete;
-        /// @endcond SKIP
+        /// @endcond
 
 {% if debug %}\
         // -- Entity counting (manual definitions) --

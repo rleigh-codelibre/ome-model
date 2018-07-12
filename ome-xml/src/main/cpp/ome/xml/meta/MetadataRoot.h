@@ -70,7 +70,7 @@ namespace ome
 
         MetadataRoot&
         operator= (const MetadataRoot&) = delete;
-        /// @endcond SKIP
+        /// @endcond
       };
 
     }

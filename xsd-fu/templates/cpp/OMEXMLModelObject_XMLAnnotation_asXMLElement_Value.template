@@ -1,0 +1,36 @@
+        /// @todo Catch and/or rethrow actual xerces exceptions
+
+        // Don't validate.  Currently fails due to inheriting our
+        // schema if no namespace was explicitly specified.
+        std::string wrappedValue("<wrapped xmlns=\"\">");
+        wrappedValue += this->impl->value;
+        wrappedValue += "</wrapped>";
+
+#ifdef OME_HAVE_XERCES_DOM
+        common::xml::dom::ParseParameters params;
+        params.validationScheme = xercesc::XercesDOMParser::Val_Never;
+        DOMDocument Value_document(ome::xml::createDocument(wrappedValue, params));
+        DOMElement value_element = document.createElementNS(getXMLNamespace(), "Value");
+
+        for (xercesc::DOMNode *elem = Value_document.getDocumentElement().get()->getFirstChild();
+             elem != 0;
+             elem = elem->getNextSibling())
+          {
+            DOMNode Value_subNode(document->importNode(elem, true), false);
+            value_element.appendChild(Value_subNode);
+          }
+        element.appendChild(value_element);
+#elif OME_HAVE_QT5_DOM
+        DOMDocument Value_document(ome::xml::createDocument(wrappedValue));
+        DOMElement value_element = document.createElementNS(QString::fromUtf8(getXMLNamespace().c_str()),
+                                                            QString::fromUtf8("Value"));
+
+        for (DOMNode elem = Value_document.documentElement().firstChild();
+             !elem.isNull();
+             elem = elem.nextSibling())
+          {
+            DOMNode Value_subNode(document.importNode(elem, true));
+            value_element.appendChild(Value_subNode);
+          }
+        element.appendChild(value_element);
+#endif

@@ -2,5 +2,6 @@
 Pseudo-package to import generateDS.
 """
 
-import generateDS
+
+from . import generateDS
 __all__ = ["generateDS"]

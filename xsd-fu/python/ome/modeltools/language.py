@@ -25,6 +25,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
+
 import copy
 import os
 
@@ -185,7 +186,7 @@ class Language(object):
         return False
 
     def hasPrimitiveType(self, type):
-        if (type in self.primitive_type_map.values() or
+        if (type in list(self.primitive_type_map.values()) or
                 type in self.primitive_types):
             return True
         return False
@@ -219,7 +220,7 @@ class Language(object):
             return None
             
     def getSubstitutionTypes(self):
-        return self.substitutionGroup_map.keys()
+        return list(self.substitutionGroup_map.keys())
             
     def isPrimitiveBase(self, type):
         if type in self.primitive_base_types:
@@ -307,7 +308,7 @@ class Java(Language):
         self.type_map['MIMEtype'] = 'String'
 
         self.name = "Java"
-        self.template_dir = "templates-java"
+        self.template_dir = "templates/java"
         self.source_suffix = ".java"
         self.header_suffix = None
         self.converter_name = "MetadataConverter"
@@ -398,7 +399,7 @@ class CXX(Language):
         self.type_map['MIMEtype'] = 'std::string'
 
         self.name = "C++"
-        self.template_dir = "templates-cpp"
+        self.template_dir = "templates/cpp"
         self.source_suffix = ".cpp"
         self.header_suffix = ".h"
         self.converter_name = "Convert"

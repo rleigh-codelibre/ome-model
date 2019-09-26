@@ -19,28 +19,22 @@
 
 """Various utility classes and functions."""
 
+
 import codecs
 from datetime import timedelta, tzinfo
 import os
 import re
 import textwrap
 import time
-from itertools import izip, imap
-try:
-    # assigned so they're importable
-    frozenset = frozenset
-    set = set
-except NameError:
-    from sets import Set as set
-try:
-    from operator import itemgetter
-except ImportError:
-    def itemgetter(item):
-        return lambda obj: obj[item]
+
+import six
+from six.moves import zip
+from six.moves import map
+from operator import itemgetter
 
 missing = object()
 
-__all__ = ['distinct', 'pathmatch', 'relpath', 'wraptext', 'odict', 'UTC',
+__all__ = ['distinct', 'pathmatch', 'relpath', 'wraptext', 'UTC',
            'LOCALTZ']
 __docformat__ = 'restructuredtext en'
 
@@ -193,74 +187,6 @@ def wraptext(text, width=70, initial_indent='', subsequent_indent=''):
     return wrapper.wrap(text)
 
 
-class odict(dict):
-    """Ordered dict implementation.
-
-    :see: http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/107747
-    """
-    def __init__(self, data=None):
-        dict.__init__(self, data or {})
-        self._keys = dict.keys(self)
-
-    def __delitem__(self, key):
-        dict.__delitem__(self, key)
-        self._keys.remove(key)
-
-    def __setitem__(self, key, item):
-        dict.__setitem__(self, key, item)
-        if key not in self._keys:
-            self._keys.append(key)
-
-    def __iter__(self):
-        return iter(self._keys)
-    iterkeys = __iter__
-
-    def clear(self):
-        dict.clear(self)
-        self._keys = []
-
-    def copy(self):
-        d = odict()
-        d.update(self)
-        return d
-
-    def items(self):
-        return zip(self._keys, self.values())
-
-    def iteritems(self):
-        return izip(self._keys, self.itervalues())
-
-    def keys(self):
-        return self._keys[:]
-
-    def pop(self, key, default=missing):
-        if default is missing:
-            return dict.pop(self, key)
-        elif key not in self:
-            return default
-        self._keys.remove(key)
-        return dict.pop(self, key, default)
-
-    def popitem(self, key):
-        self._keys.remove(key)
-        return dict.popitem(key)
-
-    def setdefault(self, key, failobj=None):
-        dict.setdefault(self, key, failobj)
-        if key not in self._keys:
-            self._keys.append(key)
-
-    def update(self, dict):
-        for (key, val) in dict.items():
-            self[key] = val
-
-    def values(self):
-        return map(self.get, self._keys)
-
-    def itervalues(self):
-        return imap(self.get, self._keys)
-
-
 try:
     relpath = os.path.relpath
 except AttributeError:
@@ -314,14 +240,7 @@ class FixedOffsetTimezone(tzinfo):
         return ZERO
 
 
-try:
-    from pytz import UTC
-except ImportError:
-    UTC = FixedOffsetTimezone(0, 'UTC')
-    """`tzinfo` object for UTC (Universal Time).
-
-    :type: `tzinfo`
-    """
+from pytz import UTC
 
 STDOFFSET = timedelta(seconds=-time.timezone)
 if time.daylight:

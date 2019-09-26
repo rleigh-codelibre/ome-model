@@ -25,7 +25,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from util import odict
+
+from collections import OrderedDict
 import logging
 import re
 
@@ -50,7 +51,7 @@ class OMEModelObject(OMEModelEntity):
         self.base = element.getBase()
         self.name = element.getName()
         self.type = element.getType()
-        self.properties = odict()
+        self.properties = OrderedDict()
         self.isAbstract = False
         self.isParentOrdered = False
         self.isChildOrdered = False
@@ -143,7 +144,7 @@ class OMEModelObject(OMEModelEntity):
         doc="""Whether or not the model object is a reference.""")
 
     def _get_isAnnotated(self):
-        for v in self.properties.values():
+        for v in list(self.properties.values()):
             if v.name == "AnnotationRef":
                 return True
         return False
@@ -152,7 +153,7 @@ class OMEModelObject(OMEModelEntity):
         doc="""Whether or not the model object is annotated.""")
 
     def _get_isNamed(self):
-        for v in self.properties.values():
+        for v in list(self.properties.values()):
             if v.name == "Name" and not v.isUnique:
                 return True
         return False
@@ -161,7 +162,7 @@ class OMEModelObject(OMEModelEntity):
         doc="""Whether or not the model object is named.""")
 
     def _get_isDescribed(self):
-        for v in self.properties.values():
+        for v in list(self.properties.values()):
             if v.name == "Description":
                 return True
         return False
@@ -198,7 +199,7 @@ class OMEModelObject(OMEModelEntity):
             base = self.model.getObjectByName(base)
             if base is None:
                 return properties
-            properties += base.properties.values()
+            properties += list(base.properties.values())
             base = base.base
     baseObjectProperties = property(
         _get_baseObjectProperties,
@@ -272,7 +273,7 @@ class OMEModelObject(OMEModelEntity):
             props.append([
                 self.langBaseType, "value", None, "Element's text data",
                 False])
-        for prop in self.properties.values():
+        for prop in list(self.properties.values()):
             if not prop.isUnitsEnumeration:
                 props.append([
                     prop.instanceVariableType, prop.instanceVariableName,
@@ -285,7 +286,7 @@ class OMEModelObject(OMEModelEntity):
 
     def _get_header(self):
         header = None
-        if self.name in self.model.opts.lang.model_type_map.keys():
+        if self.name in list(self.model.opts.lang.model_type_map.keys()):
             pass
         elif isinstance(self.model.opts.lang, language.Java):
             header = "ome.xml.model.%s" % self.name
@@ -316,7 +317,7 @@ class OMEModelObject(OMEModelEntity):
                 path = re.sub("::", "/", self.parentName)
                 deps.add("ome/xml/model/%s.h" % path)
 
-        for prop in self.properties.values():
+        for prop in list(self.properties.values()):
             for dep in prop.header_dependencies:
                 deps.add(dep)
 
@@ -331,7 +332,7 @@ class OMEModelObject(OMEModelEntity):
     def _get_source_deps(self):
         deps = set()
 
-        if self.name in self.model.opts.lang.model_type_map.keys():
+        if self.name in list(self.model.opts.lang.model_type_map.keys()):
             pass
         elif isinstance(self.model.opts.lang, language.Java):
             pass
@@ -340,7 +341,7 @@ class OMEModelObject(OMEModelEntity):
             deps.add("ome/xml/model/%s.h" % path)
             deps.add("ome/xml/model/OMEModel.h")
 
-        for prop in self.properties.values():
+        for prop in list(self.properties.values()):
             deps.update(prop.source_dependencies)
 
         return sorted(deps)
@@ -351,14 +352,14 @@ class OMEModelObject(OMEModelEntity):
     def _get_fwd(self):
         fwd = set()
 
-        if self.name in self.model.opts.lang.model_type_map.keys():
+        if self.name in list(self.model.opts.lang.model_type_map.keys()):
             pass
         elif isinstance(self.model.opts.lang, language.Java):
             pass
         elif isinstance(self.model.opts.lang, language.CXX):
             fwd.add("OMEModel")
 
-        for prop in self.properties.values():
+        for prop in list(self.properties.values()):
             for f in prop.forward:
                 fwd.add(f)
         if self.name in fwd:
@@ -379,7 +380,7 @@ class OMEModelObject(OMEModelEntity):
         parent = None
 
         if parents is not None:
-            parent = self.model.getObjectByName(parents.keys()[0])
+            parent = self.model.getObjectByName(list(parents.keys())[0])
 
         return parent
 

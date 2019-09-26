@@ -13,6 +13,9 @@
 
 """Implementation of a number of stream filters."""
 
+
+from six import chr
+import six
 try:
     any
 except NameError:
@@ -101,13 +104,13 @@ class HTMLFormFiller(object):
                                 checked = False
                                 if isinstance(value, (list, tuple)):
                                     if declval is not None:
-                                        checked = declval in [unicode(v) for v
+                                        checked = declval in [six.text_type(v) for v
                                                               in value]
                                     else:
                                         checked = any(value)
                                 else:
                                     if declval is not None:
-                                        checked = declval == unicode(value)
+                                        checked = declval == six.text_type(value)
                                     elif type == 'checkbox':
                                         checked = bool(value)
                                 if checked:
@@ -123,7 +126,7 @@ class HTMLFormFiller(object):
                                     value = value[0]
                                 if value is not None:
                                     attrs |= [
-                                        (QName('value'), unicode(value))
+                                        (QName('value'), six.text_type(value))
                                     ]
                     elif tagname == 'select':
                         name = attrs.get('name')
@@ -166,10 +169,10 @@ class HTMLFormFiller(object):
                     select_value = None
                 elif in_select and tagname == 'option':
                     if isinstance(select_value, (tuple, list)):
-                        selected = option_value in [unicode(v) for v
+                        selected = option_value in [six.text_type(v) for v
                                                     in select_value]
                     else:
-                        selected = option_value == unicode(select_value)
+                        selected = option_value == six.text_type(select_value)
                     okind, (tag, attrs), opos = option_start
                     if selected:
                         attrs |= [(QName('selected'), 'selected')]
@@ -185,7 +188,7 @@ class HTMLFormFiller(object):
                     option_text = []
                 elif in_textarea and tagname == 'textarea':
                     if textarea_value:
-                        yield TEXT, unicode(textarea_value), pos
+                        yield TEXT, six.text_type(textarea_value), pos
                         textarea_value = None
                     in_textarea = False
                 yield kind, data, pos
@@ -311,7 +314,7 @@ class HTMLSanitizer(object):
         # The set of URI schemes that are considered safe.
 
     # IE6 <http://heideri.ch/jso/#80>
-    _EXPRESSION_SEARCH = re.compile(u"""
+    _EXPRESSION_SEARCH = re.compile("""
         [eE
          \uFF25 # FULLWIDTH LATIN CAPITAL LETTER E
          \uFF45 # FULLWIDTH LATIN SMALL LETTER E
@@ -356,7 +359,7 @@ class HTMLSanitizer(object):
     # IE6 <http://openmya.hacker.jp/hasegawa/security/expression.txt>
     #     7) Particular bit of Unicode characters
     _URL_FINDITER = re.compile(
-        u'[Uu][Rr\u0280][Ll\u029F]\s*\(([^)]+)').finditer
+        '[Uu][Rr\u0280][Ll\u029F]\s*\(([^)]+)').finditer
 
     def __call__(self, stream):
         """Apply the filter to the given stream.
@@ -528,7 +531,7 @@ class HTMLSanitizer(object):
         def _repl(match):
             t = match.group(1)
             if t:
-                return unichr(int(t, 16))
+                return chr(int(t, 16))
             t = match.group(2)
             if t == '\\':
                 return r'\\'

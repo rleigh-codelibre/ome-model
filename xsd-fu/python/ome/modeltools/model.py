@@ -30,7 +30,8 @@ an OME XML (http://www.ome-xml.org) XSD document.
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from util import odict
+
+from collections import OrderedDict
 import logging
 
 from ome.modeltools.object import OMEModelObject
@@ -83,7 +84,7 @@ class OMEModel(object):
     def __init__(self, opts):
         self.opts = opts
         self.elementNameObjectMap = dict()
-        self.objects = odict()
+        self.objects = OrderedDict()
         self.parents = dict()
         # A mapping of abstract substitution groups with the abstract element
         self.substitutionElement_map = dict()
@@ -129,7 +130,7 @@ class OMEModel(object):
 
     def getAllHeaders(self):
         headers = set()
-        for o in self.objects.values():
+        for o in list(self.objects.values()):
             h = o.header_dependencies
             if h is not None:
                 headers.union(h)
@@ -137,8 +138,8 @@ class OMEModel(object):
 
     def getEnumHeaders(self):
         headers = set()
-        for obj in self.objects.values():
-            for prop in obj.properties.values():
+        for obj in list(self.objects.values()):
+            for prop in list(obj.properties.values()):
                 if not prop.isEnumeration:
                     continue
                 h = prop.header
@@ -148,7 +149,7 @@ class OMEModel(object):
 
     def getObjectHeaders(self):
         headers = set()
-        for obj in self.objects.values():
+        for obj in list(self.objects.values()):
             h = obj.header
             if h is not None:
                 headers.add(h)
@@ -226,7 +227,7 @@ class OMEModel(object):
         for i, element in enumerate(elements):
             if self.opts.lang.hasSubstitutionGroup(element.getName()):
                 continue
-            if (element.getName() in self.substitutionElement_map.keys()):
+            if (element.getName() in list(self.substitutionElement_map.keys())):
                 if parent is not None:
                     element = self.substitutionElement_map[element.getName()]
                 if parent is None:
@@ -255,7 +256,7 @@ class OMEModel(object):
         injects properties into referenced objects to provide back links.
         """
         references = dict()
-        for o in self.objects.values():
+        for o in list(self.objects.values()):
             if o.isSettings and not o.isAbstract:
                 shortName = o.name.replace('Settings', '')
                 ref = '%sRef' % (shortName)
@@ -268,8 +269,8 @@ class OMEModel(object):
                 delegate.namespace = o.namespace
                 prop = OMEModelProperty.fromReference(delegate, o, self)
                 o.properties[ref] = prop
-        for o in self.objects.values():
-            for prop in o.properties.values():
+        for o in list(self.objects.values()):
+            for prop in list(o.properties.values()):
                 if self.opts.lang.hasAbstractType(prop.name):
                     abstractName = self.opts.lang.abstractType(prop.name)
                     prop.delegate.name = abstractName
@@ -299,7 +300,7 @@ class OMEModel(object):
                 references[shortName].append(v)
         logging.debug("Model references: %s" % references)
 
-        for o in self.objects.values():
+        for o in list(self.objects.values()):
             if o.name not in references:
                 continue
             for ref in references[o.name]:
@@ -348,7 +349,7 @@ class OMEModel(object):
     def _get_header_deps(self):
         deps = set()
 
-        for o in self.objects.values():
+        for o in list(self.objects.values()):
             dep = o.header
             if dep is not None:
                 deps.add(dep)

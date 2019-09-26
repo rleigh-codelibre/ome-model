@@ -82,6 +82,8 @@
     <xsdfu.script>../xsd-fu/xsd-fu</xsdfu.script>
     <xsdfu.modelpath>${basedir}/target/generated-sources/xsd-fu</xsdfu.modelpath>
     <xsdfu.metadatapath>${basedir}/target/generated-sources/xsd-fu</xsdfu.metadatapath>
+    <python.executable>python3</python.executable>
+    <python.path>${project.rootdir}/xsd-fu/python</python.path>
   </properties>
 
   <build>
@@ -105,7 +107,7 @@
               <goal>exec</goal>
             </goals>
             <configuration>
-              <executable>python</executable>
+              <executable>${python.executable}</executable>
               <arguments>
                 <argument>${xsdfu.script}</argument>
                 <argument>omexml_model_all</argument>
@@ -113,6 +115,9 @@
                 <argument>--print-generated</argument>
                 <argument>${project.rootdir}/${ome.model.omeschema}</argument>
               </arguments>
+              <environmentVariables>
+                <PYTHONPATH>${python.path}</PYTHONPATH>
+              </environmentVariables>
             </configuration>
           </execution>
 
@@ -124,7 +129,7 @@
               <goal>exec</goal>
             </goals>
             <configuration>
-              <executable>python</executable>
+              <executable>${python.executable}</executable>
               <arguments>
                 <argument>${xsdfu.script}</argument>
                 <argument>omexml_metadata_all</argument>
@@ -132,6 +137,9 @@
                 <argument>--print-generated</argument>
                 <argument>${project.rootdir}/${ome.model.omeschema}</argument>
               </arguments>
+              <environmentVariables>
+                <PYTHONPATH>${python.path}</PYTHONPATH>
+              </environmentVariables>
             </configuration>
           </execution>
         </executions>
